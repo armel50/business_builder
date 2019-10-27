@@ -1,0 +1,2 @@
+class SharedFile < ApplicationRecord
+end

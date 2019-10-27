@@ -1,0 +1,2 @@
+class SharedFilesController < ApplicationController
+end
