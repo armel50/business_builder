@@ -1,0 +1,55 @@
+
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+        <h2 class="ui teal image header">
+            <img src="assets/images/logo.png" class="image">
+            <div class="content">
+                <%= loggin_page? @current_uri%>
+            </div>
+        </h2>
+        
+        <%= form_for user ,:html => {:class => "ui large form" }, url: @current_uri  do |f|%>
+        
+   
+            <div class="ui stacked segment">
+             <% if @current_uri != "/logIn"%>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <%=f.text_field :name, placeholder: "Enter You Name" %>
+                    </div>
+                </div>
+             <%end%>
+
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <%=f.email_field :email,  placeholder: "E-mail address"%>
+                    </div>
+                </div>
+
+
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <%=f.password_field :password, placeholder: "Password"%>
+                    </div>
+                </div>
+                <% if @current_uri != "/logIn"%>
+                admin?  <%=f.check_box :admin%>
+                <%end%>
+
+                <%=f.submit "Sign Up", class: "ui fluid large teal submit button" %> 
+            </div>
+        <%end%>
+         <% if @current_uri == "/logIn"%>
+            <div class="ui message">
+                New to us? <a href="/users/new">Sign Up</a>
+            </div>
+        <%else%>
+            <div class="ui message">
+                Already have an account? <a href="/logIn">Log In</a>
+            </div>
+        <%end%>
+  </div>
+</div>

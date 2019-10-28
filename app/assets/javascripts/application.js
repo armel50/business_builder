@@ -20,7 +20,7 @@ $(document).ready(function() {
     $('.masthead').visibility({
         once: false,
         onBottomPassed: function() {
-          $('.fixed.menu').transition('fade in');
+          $('.fixed.menu').transition('fade in',1000);
         },
         onBottomPassedReverse: function() {
           $('.fixed.menu').transition('fade out');
@@ -29,5 +29,11 @@ $(document).ready(function() {
 
     // create sidebar and attach to menu open
     $('.ui.sidebar').sidebar('attach events', '.toc.item');
+
+    $(".main.item").hover(function(){
+      $(this).toggleClass("active", 1000000);
+    },function(){
+      $(this).toggleClass("active", 10000000);
+    });
 
   });

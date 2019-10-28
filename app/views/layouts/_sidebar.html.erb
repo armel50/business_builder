@@ -5,14 +5,21 @@
             <a class="item">Work</a>
             <a class="item">Company</a>
             <a class="item">Careers</a>
+      
         <div class="right menu">
-            <div class="item">
-                <a class="ui button">Log in</a>
+            <%if !session[:user_id]%>
+                <div class="item">
+                    <a class="ui button" href="/logIn">Log in</a>
+                </div>
+                <div class="item" href="/users/new">
+                    <a class="ui primary button">Sign Up</a>
+                </div>
+            <%end%>
+
+                <%= display_logout "ui primary button"%>
             </div>
-            <div class="item">
-                <a class="ui primary button">Sign Up</a>
-            </div>
-        </div>
+        
+        
     </div>
 </div>
 
@@ -22,8 +29,11 @@
   <a class="item">Work</a>
   <a class="item">Company</a>
   <a class="item">Careers</a>
-  <a class="item">Login</a>
-  <a class="item">Signup</a>
+  <%if !session[:user_id]%>
+    <a class="item" href="/logIn">Login</a>
+    <a class="item" href="/users/new">Signup</a>
+  <%end%>
+  <%= display_logout "item" %>
 </div>
 
 
@@ -35,13 +45,16 @@
                 <a class="toc item">
                 <i class="sidebar icon"></i>
                 </a>
-                <a class="active item">Home</a>
-                <a class="item">Work</a>
-                <a class="item">Company</a>
-                <a class="item">Careers</a>
+                <a class="main item">Home</a>
+                <a class="main item">Work</a>
+                <a class="main item">Company</a>
+                <a class="main item">Careers</a>
                 <div class="right item">
-                <a class="ui inverted button">Log in</a>
-                <a class="ui inverted button">Sign Up</a>
+                <% if !session[:user_id ]%>
+                    <a class="ui inverted button" href="/logIn">Log in</a>
+                    <a class="ui inverted button" href="/users/new">Sign Up</a>
+                <%end%>
+                 <%= display_logout "ui inverted button" %>
             </div>
         </div>
     </div>
