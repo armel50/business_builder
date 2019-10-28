@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   post "/users/new", to: "users#create"
 
   get "/logout", to: "users#logout"
-   
+  get '/auth/github/callback', to: "sessions#create_with_github"
 end

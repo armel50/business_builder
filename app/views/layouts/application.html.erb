@@ -23,6 +23,15 @@
   <body>
     <%= render 'layouts/sidebar' %>
     <div class = "ui container">
+    <% if flash[:notice]%>
+      <div class="ui message">
+        <i class="close icon"></i>
+        <div class="header">
+          <%=flash[:notice]%>
+        </div>
+        <p>This is a special notification which you can dismiss if you're bored with it.</p>
+    </div>
+    <%end%>
       <%= yield %>
     </div>
     <%= render 'layouts/footer'%>

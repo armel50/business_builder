@@ -31,9 +31,13 @@ $(document).ready(function() {
     $('.ui.sidebar').sidebar('attach events', '.toc.item');
 
     $(".main.item").hover(function(){
-      $(this).toggleClass("active", 1000000);
+      $(this).toggleClass("active", 2000);
     },function(){
-      $(this).toggleClass("active", 10000000);
+      $(this).toggleClass("active", 2000);
     });
+
+    $('.message .close').on('click', function() {
+    $(this).closest('.message').transition('fade out');
+  });
 
   });

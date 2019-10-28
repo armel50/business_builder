@@ -28,8 +28,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 #login through google, github, and linkedin
 gem 'omniauth'
+gem 'omniauth-google-oauth2'
 
-gem 'omniauth-google' 
+gem "dotenv-rails"
 
 gem 'omniauth-github' 
 

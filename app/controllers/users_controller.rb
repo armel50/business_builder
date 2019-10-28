@@ -54,6 +54,9 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
     end 
 
+    def omniauth_login
+    end
+
     private 
     def user_params 
         params.require(:user).permit(:name,:email,:password,:admin)
