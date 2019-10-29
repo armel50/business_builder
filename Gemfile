@@ -33,7 +33,7 @@ gem 'omniauth-google-oauth2'
 gem "dotenv-rails"
 
 gem 'omniauth-github' 
-
+gem 'tux'
 gem 'omniauth-linkedin'
 
 # Use ActiveStorage variant

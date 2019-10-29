@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_27_193246) do
+ActiveRecord::Schema.define(version: 2019_10_28_232034) do
 
   create_table "businesses", force: :cascade do |t|
     t.string "password_digest"
@@ -25,14 +25,34 @@ ActiveRecord::Schema.define(version: 2019_10_27_193246) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "departments", force: :cascade do |t|
+    t.integer "business_id"
+    t.string "name"
+  end
+
+  create_table "direct_chats", force: :cascade do |t|
+    t.string "title"
+    t.integer "sender_id"
+    t.integer "receiver_id"
+  end
+
   create_table "goals", force: :cascade do |t|
     t.text "content"
+    t.integer "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "chat_room_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "notifications", force: :cascade do |t|
     t.text "content"
+    t.integer "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -40,6 +60,7 @@ ActiveRecord::Schema.define(version: 2019_10_27_193246) do
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.integer "progression"
+    t.integer "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -47,8 +68,15 @@ ActiveRecord::Schema.define(version: 2019_10_27_193246) do
   create_table "shared_files", force: :cascade do |t|
     t.string "title"
     t.text "content"
+    t.integer "user_id"
+    t.integer "chat_room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_business", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "business_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -4,4 +4,14 @@ class User < ApplicationRecord
     validates :password, length: {minimum: 8}
 
     has_secure_password
+
+    has_many :user_businesses
+    has_many :businesses, through: :user_businesses
+    has_many :direct_chats
+    has_one :department, through: :businesses
+    has_many :notifications, through: :department
+
+    def is_admin? 
+        self.admin ? true : false
+    end
 end
