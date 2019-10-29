@@ -6,13 +6,17 @@ Rails.application.routes.draw do
   resources :goals
   resources :projects
   resources :businesses
+  resources :departments, only: [:index, :show, :new,:create,:update,:edit,:destroy]
   resources :users, only: [:index,:show,:create,:new,:edit,:destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :admin do
-    resources :businesses, only: [:index,:show,:new,:create,:update,:edit,:destroy]
+    resources :businesses, only: [:index,:show,:new,:create,:update,:edit,:destroy]  
     resources :projects, only: [:index, :show, :new,:create,:update,:edit,:destroy]
     resources :chat_rooms, only: [:index, :show, :new,:create,:update,:edit,:destroy]
+  
+    
   end
+
     root "application#home"
 
   get "/logIn", to: "users#login"
@@ -21,4 +25,13 @@ Rails.application.routes.draw do
 
   get "/logout", to: "users#logout"
   get '/auth/github/callback', to: "sessions#create_with_github"
+
+
+#All the following routes are nested routes for the admin
+  post '/businesses/:business_id/departments', to: "admin/departments#create"
+  patch '/businesses/:business_id/departments', to: "admin/departments#update"
+  get '/businesses/:business_id/departments', to: "admin/departments#index", as: :admin_business_deparments
+  get '/businesses/:business_id/department/:id/edit', to: "admin/departments#edit", as: :edit_admin_business_department
+  get '/businesses/:business_id/departments/new', to: "admin/departments#new", as: :new_admin_business_department
+
 end
