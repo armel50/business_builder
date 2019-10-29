@@ -1,0 +1,70 @@
+<div class = "ui container">
+    <%=form_for @business,:html => {:class => "ui large form" } do |f|%> 
+  
+        <div class = "field">
+            <label>Business Name <label>
+            <%= f.text_field :name%>
+        </div>
+       
+       
+        <div class = "field">
+        <label>Billing Address</label>
+            <div class = "fields">
+                <div class = "twelve wide field">
+                    <%= f.text_field :street_name%>
+                </div>
+                <div class = "four wide field">
+                    <%= f.text_field :city%>
+                </div> 
+                
+            </div>
+        </div> 
+
+        <div class = "two fields contry_info">
+                <div class = "field state">
+                    <label>State</label> 
+                    <%=f.text_field :state, list: "us_states"%>
+                    <%# this is list coming from businesesse/_us_states.html.erb %>
+
+                    <datalist id = "us_states">
+                        <%= render "admin/businesses/us_states"%>
+                    </datalist>
+                </div>
+                <div class = "field contry">
+                    <label>country<label>
+                    <%=f.text_field :country,list: "auto_complete_countries"%>
+                <%# this is list coming from businesesse/_countries.html.erb %>
+
+                     <datalist id = "auto_complete_countries">
+                        <%= render 'admin/businesses/countries' %>
+                    </datalist>
+                </div>
+        </div>
+
+
+        <div class = "field">
+            
+         <%= f.fields_for :categories do |category| %>
+            <%= category.label :category_1 %>
+            <%= category.text_field :category_1 , list: "auto_complete_category"%><br>
+        
+            <%= category.label :category_2 %>
+            <%= category.text_field :category_2, list: "auto_complete_category"%><br>
+        <% end %>
+
+            <datalist id = "auto_complete_category">
+                <%Category.all.each do |cat|%>
+                    <option value= "<%=cat.name%>"><%=cat.name%></option>
+                <%end%>
+            </datalist>
+        </div>
+        
+          <div class = "field">
+            <label>Business Password<label>
+            <%= f.password_field :password%>
+        </div>
+        
+        
+        <%=f.submit "Create Business"%>
+    <%end%>
+</div>

@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_232034) do
+ActiveRecord::Schema.define(version: 2019_10_29_054200) do
 
   create_table "businesses", force: :cascade do |t|
     t.string "password_digest"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "street_name"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.integer "admin_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.integer "business_id"
   end
 
   create_table "chat_rooms", force: :cascade do |t|
@@ -74,7 +84,7 @@ ActiveRecord::Schema.define(version: 2019_10_28_232034) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_business", force: :cascade do |t|
+  create_table "user_businesses", force: :cascade do |t|
     t.integer "user_id"
     t.integer "business_id"
   end

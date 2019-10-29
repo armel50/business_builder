@@ -21,8 +21,10 @@
   </head>
 
   <body>
+ 
     <%= render 'layouts/sidebar' %>
     <div class = "ui container">
+
     <% if flash[:notice]%>
       <div class="ui message">
         <i class="close icon"></i>
@@ -32,7 +34,25 @@
         <p>This is a special notification which you can dismiss if you're bored with it.</p>
     </div>
     <%end%>
+
+
+        <% if @business && @business.errors.any? %>
+        <div id="error_explanation" class= "ui floating message">
+        <h2>
+          <%= pluralize(@business.errors.count, "error") %>
+          prohibited the creation of this business:
+        </h2>
+    
+        <ul>
+        <% @business.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class = "ui container">
       <%= yield %>
+      </div>
     </div>
     <%= render 'layouts/footer'%>
 

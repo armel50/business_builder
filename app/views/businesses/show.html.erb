@@ -1,0 +1,8 @@
+<%=@business.name %>
+<%= @business.founder_name%>
+<%=@business.created_at%>
+
+
+<%=@business.categories.each do |category|%>
+    <%=category.name%>
+<%end%>
