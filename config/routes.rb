@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 #All the following routes are nested routes for the admin
   post '/businesses/:business_id/departments', to: "admin/departments#create"
   patch '/businesses/:business_id/departments', to: "admin/departments#update"
+  delete '/businesses/:business_id/department/:id/delete', to: "admin/departments#destroy", as: :delete_business_department
   get '/businesses/:business_id/departments', to: "admin/departments#index", as: :admin_business_deparments
   get '/businesses/:business_id/department/:id/edit', to: "admin/departments#edit", as: :edit_admin_business_department
   get '/businesses/:business_id/departments/new', to: "admin/departments#new", as: :new_admin_business_department

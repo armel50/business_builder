@@ -1,1 +1,3 @@
 <%= @department.name%>
+
+<%= link_to "Delete #{@department.name}", delete_business_department_path(@department.business, @department),data: {:confirm => "Are you sure you want to delete #{@department.name}?"}, :method => :delete %>

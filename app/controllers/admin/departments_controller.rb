@@ -22,6 +22,21 @@ class Admin::DepartmentsController < ApplicationController
     def update
         p params 
     end
+
+    def destroy 
+        @business = found_business
+        @department = found_department 
+        if @business
+            flash[:notice] = "You sucessfully deleted the #{@department.name} department." 
+            @department.delete 
+          
+            redirect_to @business
+        else 
+            flash[:notice] = "This is not your business"
+            redirect_to current_user(session)
+        end
+
+    end
     
 
     def index 
