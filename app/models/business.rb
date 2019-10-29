@@ -1,4 +1,5 @@
 class Business < ApplicationRecord
+  
     validates :name, uniqueness: true 
     validates :password, length: {minimum: 8}
     has_secure_password

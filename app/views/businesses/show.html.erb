@@ -3,6 +3,6 @@
 <%=@business.created_at%>
 
 
-<%=@business.categories.each do |category|%>
+<% @business.categories.each do |category|%>
     <%=category.name%>
 <%end%>

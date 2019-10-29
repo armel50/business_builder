@@ -36,6 +36,8 @@ gem 'omniauth-github'
 gem 'tux'
 gem 'omniauth-linkedin'
 
+gem "pry"
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
