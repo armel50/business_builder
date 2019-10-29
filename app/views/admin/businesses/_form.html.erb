@@ -1,3 +1,13 @@
+<div class = "ui container center">
+<h2 class="ui icon header">
+  <i class="settings icon"></i>
+  <div class="content">
+    Account Settings
+    <div class="sub header">Manage your account settings and set e-mail preferences.</div>
+  </div>
+</h2>
+</div>
+
 <div class = "ui container">
     <%=form_for @business,:html => {:class => "ui large form" } do |f|%> 
   
@@ -46,10 +56,10 @@
             
          <%= f.fields_for :categories do |category| %>
             <%= category.label :category_1 %>
-            <%= category.text_field :category_1 , list: "auto_complete_category"%><br>
+            <%= category.text_field :category_1 , list: "auto_complete_category" %><br>
         
             <%= category.label :category_2 %>
-            <%= category.text_field :category_2, list: "auto_complete_category"%><br>
+            <%= category.text_field :category_2, list: "auto_complete_category" %><br>
         <% end %>
 
             <datalist id = "auto_complete_category">

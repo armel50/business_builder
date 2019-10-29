@@ -5,38 +5,40 @@ class BusinessesController < ApplicationController
     @user = User.find_by(id: session[:user_id])
     @business = Business.new(business_params)
 
- 
+    #business has only one admin
     @business.admin = @user
 
     if @business.save && @user
         flash[:notice] = "Your business has been successfully created"
-        
+        # the following code create categories and associate them to the business
         if category_params[:category_1] != "" || category_params[:category_2] != ""
-         
-        #   binding.pry
-            
             category_params.each do |key, val|
-               
                 new_category = Category.find_or_create_by(name:  category_params[key]) if !category_params[key].empty?
-               
                 @business.categories << new_category 
-                binding.pry
             end
         end
+
         @user.businesses << @business
-
-
-      
         redirect_to @business
-
     else
         render "/admin/businesses/new"
     end
-
   end
 
   def show 
     @business = Business.find(params[:id])
+  end
+
+  def destroy 
+    @business = Business.find(params[:id])
+    if is_yours?(@business)
+        flash[:notice] = "Your business #{@business.name} has been sucessfully deleted."
+        @business.delete 
+        redirect_to root_path
+    else 
+        flash[:error] = "#{@business.name} business is not yours."
+        redirect_to root_path
+    end
   end
 
    private 

@@ -18,4 +18,8 @@ class Business < ApplicationRecord
     def founder_name
         self.admin.name
     end
+
+    def author_id 
+        self.admin.id
+    end
 end

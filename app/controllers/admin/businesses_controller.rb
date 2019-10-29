@@ -12,13 +12,11 @@ class  Admin::BusinessesController < ApplicationController
     end
 
    
-
     def edit 
         @business = Business.find(params[:id])
     end 
 
-    def destroy 
-    end
+  
 
     private 
     def business_params

@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   resources :users, only: [:index,:show,:create,:new,:edit,:destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :admin do
-    resources :businesses, only: [:index,:show,:new,:create,:update,:edit,:delete]
-    resources :projects, only: [:index, :show, :new,:create,:update,:edit,:delete]
-    resources :chat_rooms, only: [:index, :show, :new,:create,:update,:edit,:delete]
+    resources :businesses, only: [:index,:show,:new,:create,:update,:edit,:destroy]
+    resources :projects, only: [:index, :show, :new,:create,:update,:edit,:destroy]
+    resources :chat_rooms, only: [:index, :show, :new,:create,:update,:edit,:destroy]
   end
     root "application#home"
 
