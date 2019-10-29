@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
     # before_action :logged_in? 
     # skip_before_action :logged_in?, only: [:home]
+    include ApplicationHelper
+    include UsersHelper
     def home 
         render "businesses/home"
     end

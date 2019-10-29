@@ -1,5 +1,7 @@
 require "pry"
 class BusinessesController < ApplicationController
+
+    
   def create 
     
     @user = User.find_by(id: session[:user_id])
@@ -31,6 +33,8 @@ class BusinessesController < ApplicationController
 
   def destroy 
     @business = Business.find(params[:id])
+    #is_yours and current_user can be found in the helper folder. 
+    #to use an helper in the controller you need to include the name of the module in the controller: "include UsersHelper"
     if is_yours?(@business)
         flash[:notice] = "Your business #{@business.name} has been sucessfully deleted."
         @business.delete 
