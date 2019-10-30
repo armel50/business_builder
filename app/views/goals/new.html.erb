@@ -1,0 +1,11 @@
+<h1>You are about to add a goal to a project!!1 </h1>
+
+
+
+<%= form_for @goal, html: {:class => "ui large form" }, url: "/project/#{@project.id}/goals" do |f|%>
+    <div class= "field">
+        <%=f.text_field :content %>
+    </div>
+
+    <%= f.submit "Create goal"%>
+<%end%>

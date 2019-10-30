@@ -47,5 +47,9 @@ Rails.application.routes.draw do
     resources :projects
   end
 
+  resources :project do
+    resources :goals
+  end
+
   patch "/department/4/projects", to: "projects#update"
 end
