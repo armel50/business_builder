@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
   resources :department do
     resources :projects
+    resources :chat_rooms
   end
 
   resources :project do

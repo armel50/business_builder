@@ -7,13 +7,12 @@ class Project < ApplicationRecord
         
         completed = Goal.where("project_id = :id and completed = :completed ", { id: self.id , completed: true })
         
-        total_goals = Goal.where("project_id = :id ", {id: self.id })
+        total_goals = self.goals
       
         if total_goals.size > 0 
-           result =  (completed.size / total_goals.size ) * 100
+           result =  (completed.size.to_f / total_goals.size.to_f) * 100
+        #    binding.pry
            self.update(progression: result)
-        else
-            nil
-        end
+        end 
     end
 end

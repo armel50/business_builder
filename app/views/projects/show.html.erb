@@ -2,20 +2,23 @@
   <h4 class="ui header"><%=@project.name.capitalize%></h4>
   <p> <%=@project.description%> </p>
     <hr>
+    <% @goals = @project.goals%>
   <% if @project.goals.size > 0 %>
   <h3 class = "ui header">Progerssion : <%= @project.progression%> %<h3>
-  <%else%> 
+    
+  <%else%>
+   
     <h3 class = "ui header">Please define some goals to see the progression</h3>
   <%end%>
   <h4 class="ui header "><%=@project.name.capitalize%> has <%=pluralize(@project.goals.size,"goal")%>: </h4>
   <ul>
   <%@project.goals.each do |goal|%>
-      <li class = "check_goals"><%= goal.content%> 
+      <li><%= goal.content%> -- <%= goal.completed%> 
       <span >
-        <input class="check_goals"  type = "checkbox" <%='checked' if goal.completed %>>
+        <input class="check_goals <%=goal.content.split(" ").join("_")%>"  type = "checkbox" <%='checked' if goal.completed %>>
       </span>
 
-        <%=form_tag "/submit_check_goals/#{@project.id}",  html: {class: "submit_check_goals"}, method: "post"  do  %>
+        <%=form_tag "/submit_check_goals/#{@project.id}",  class: "#{goal.content.split(" ").join("_")}", method: "post"  do  %>
           <input type = "hidden" name = "goal_id" value= "<%=goal.id%>" > 
         <% end %>
 
@@ -35,13 +38,22 @@
 
 <%= javascript_tag do %>
 
-    var project = <%=raw @project.to_json %>;
+    var project = <%=raw @goals.to_json %>;
+    var array = []
     
+    project.forEach(function(el){
+      array.push(el.content.split(" ").join("_"))
+      console.log(array);
 
+    });
+    
    var check_goals = $(".check_goals");
 
-  check_goals.on("click", function(){
-      $("form").submit()
+  array.forEach(function(el){
+    $("." + el).on("click",function(){
+      $("form." + el ).submit()
+    })
+  })
 
-   });
+ 
 <% end %>
