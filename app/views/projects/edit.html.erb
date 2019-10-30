@@ -1,0 +1,32 @@
+This is the form from projects/form
+
+ <% if @project && @project.errors.any? %>
+        <div id="error_explanation" class= "ui floating message">
+        <h2>
+          <%= pluralize(@project.errors.count, "error") %>
+          prohibited the creation of this business:
+        </h2>
+    
+        <ul>
+        <% @project.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+<%=form_for @project ,:html => {:class => "ui large form" }, url: "/department/#{@department.id}/projects/#{@project.id}"  do |f|%>
+    <div class = "field">
+        <label>Project Name</label>
+        <%= f.text_field :name %>
+        
+    </div>
+
+      <div class = "field">
+        <label>Description</label>
+        <%= f.text_area :description %>
+    </div>
+    
+    <%=f.submit "Create Project"%>
+<%end%>

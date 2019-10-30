@@ -1,3 +1,18 @@
-<%= @department.name%>
+
+<div class="ui piled segment">
+  <h4 class="ui header"><%= @department.name%>'s Goals</h4>
+  <ul>
+  <li>Te eEx eam alia facete stram, eos chorom rebum iisque.</li>
+   <li>Ais te phaedruo vide phaedrum, vim vivendum maiestatis in.</li>
+   <li>Eu quo homero blandit inmei id. , quas minimum postulant per id.</li>
+   </ul>
+</div>
+
+
+<%= @department.name%> 
+
+
+ <br><%= link_to 'Add a new project',  new_department_project_path(@department) %><br>
 
 <%= link_to "Delete #{@department.name}", delete_business_department_path(@department.business, @department),data: {:confirm => "Are you sure you want to delete #{@department.name}?"}, :method => :delete %>
+ 

@@ -35,4 +35,17 @@ Rails.application.routes.draw do
   get '/businesses/:business_id/department/:id/edit', to: "admin/departments#edit", as: :edit_admin_business_department
   get '/businesses/:business_id/departments/new', to: "admin/departments#new", as: :new_admin_business_department
 
+
+  # post '/businesses/:business_id/projects', to: "admin/departments#create"
+  # patch '/businesses/:business_id/projects', to: "admin/departments#update"
+  # delete '/businesses/:business_id/projects/:id/delete', to: "admin/departments#destroy"
+  # get '/businesses/:business_id/projects', to: "admin/departments#index"
+  # get '/businesses/:business_id/project/:id/edit', to: "admin/departments#edit"
+  # get '/businesses/:business_id/projects/new', to: "admin/departments#new"
+
+  resources :department do
+    resources :projects
+  end
+
+  patch "/department/4/projects", to: "projects#update"
 end
