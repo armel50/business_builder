@@ -3,4 +3,6 @@
   <p> <%=@project.description%> </p>
 </div>
 
-<%= link_to "Edit #{@project.name}", edit_department_project_path(@project.department, @project) %>
+<%= link_to "Edit #{@project.name}", edit_department_project_path(@project.department, @project) %> <br>
+
+<%= link_to "Delete project #{@project.name}", "/department/#{@project.department.id}/projects/#{@project.id}", method: :delete, data:{confirm: "Are you sure you want to delete project #{@project.name}"}%>

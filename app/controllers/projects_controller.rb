@@ -41,6 +41,11 @@ class ProjectsController < ApplicationController
 
 
     def destroy 
+        @project = found_project 
+        @department = found_department 
+        flash[:notice] = "Your project #{@project.name} has been sucessfully deleted"
+        @project.delete 
+        redirect_to @department
     end
 
     private 
