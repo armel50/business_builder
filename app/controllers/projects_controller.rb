@@ -1,6 +1,6 @@
 require "pry"
 class ProjectsController < ApplicationController
-  
+    
     def new 
         @project = Project.new 
         @department = found_department 
@@ -24,6 +24,11 @@ class ProjectsController < ApplicationController
 
     def show 
         @project = found_project
+        respond_to do |format| 
+           
+            format.js
+            format.html
+        end
     end
 
     def edit

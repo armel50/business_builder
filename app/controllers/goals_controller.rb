@@ -1,3 +1,4 @@
+require "pry"
 class GoalsController < ApplicationController
 
     def new 
@@ -25,6 +26,20 @@ class GoalsController < ApplicationController
         redirect_to @project
     end
 
+    def check_goal
+        
+        @goal = Goal.find_by(id: params.permit(:goal_id)[:goal_id])
+        @project = found_project
+        @goal.toggle_check_goal 
+        @project.progression_update
+        
+       
+        redirect_to @project
+        
+
+
+    end
+
     private 
     def found_goal 
         @goal = Goal.find_by(id: params[:id])
@@ -37,4 +52,6 @@ class GoalsController < ApplicationController
     def goal_params 
         params.require(:goal).permit(:content)
     end
+
+    
 end

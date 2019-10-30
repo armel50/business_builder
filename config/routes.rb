@@ -51,5 +51,6 @@ Rails.application.routes.draw do
     resources :goals
   end
 
+  post "/submit_check_goals/:project_id", to: "goals#check_goal"
   patch "/department/4/projects", to: "projects#update"
 end
