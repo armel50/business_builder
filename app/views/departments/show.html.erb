@@ -10,9 +10,10 @@
 
 
 <%= @department.name%> 
-
+<% if  @department.chat_room%>
+<br><%= link_to "Show the chatroom", department_chat_room_path(@department, @department.chat_room) %> <br>
+<% end %>
 
  <br><%= link_to 'Add a new project',  new_department_project_path(@department) %><br>
-
 <%= link_to "Delete #{@department.name}", delete_business_department_path(@department.business, @department),data: {:confirm => "Are you sure you want to delete #{@department.name}?"}, :method => :delete %>
  

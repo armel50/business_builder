@@ -11,16 +11,47 @@ class ChatRoomsController < ApplicationController
 
     def new 
         @chat_room = ChatRoom.new
+        @department = found_department 
+
     end
 
-    def create 
-        @chat_room = ChatRoom.new()
+    def create
+        @department = found_department 
+        @chat_room = ChatRoom.new(chat_params)
+        @chat_room.department = @department 
+        if @chat_room.save 
+            @department.chat_room = @chat_room 
+            redirect_to department_chat_room_path(@department,@chat_room)
+        else 
+            render "chat_rooms/new"
+        end
     end
 
     def edit 
+        @chat_room = found_chat_room 
+        @department = found_department
     end 
 
+    def update 
+        @chat_room = found_chat_room 
+        @department = found_department
+
+        if @chat_room.update(chat_params)
+            redirect_to department_chat_room_path(@department,@chat_room)
+        else 
+            render "chat_rooms/edit"
+        end
+    end
+
     def destroy
+        @chat_room = found_chat_room 
+        @chat_room.delete 
+        redirect_to found_department
+    end
+
+    def show 
+        @chat_room =found_chat_room
+        @department = found_department
     end
 
     private 
@@ -32,7 +63,7 @@ class ChatRoomsController < ApplicationController
         ChatRoom.find_by(id: params[:id])
     end
     def chat_params
-        params.require(:chat_room).permit 
+        params.require(:chat_room).permit(:title)
     end
 
 

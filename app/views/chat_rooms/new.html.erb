@@ -1,0 +1,5 @@
+<h1>Create a new chat rooommmmm</h1>
+<%= form_for @chat_room , html: {class:  "ui large form" }, url: "/department/#{@department.id}/chat_rooms" do |f|%>
+    <%=f.text_field :title , placeholder: "Title"%>
+    <%=f.submit "Create chat room"%>
+<%end%>
