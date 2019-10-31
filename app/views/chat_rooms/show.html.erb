@@ -15,9 +15,7 @@
       <a class="item files">
         <%= @chat_room.title%>'s shared files
       </a>
-      <a class="item new_participants">
-        Add new participants
-      </a>
+
       <a class="item view_participants">
         View participants
       </a>
@@ -57,23 +55,19 @@
 
 <%#=======================================================================================================%>
       <div class = "files ui container">
+            filesssssssssss
        
       </div>
  <%#=======================================================================================================%>
 
 
 
-<%#=======================================================================================================%>
-      <div class = "new_participants">
-
-      </div>
-<%#=======================================================================================================%>
-
 
 
 
 <%#=======================================================================================================%>
       <div class = "view_participants">
+        all the participantssss
       </div>
 <%#=======================================================================================================%>
 
@@ -82,3 +76,51 @@
     </div>
   </div>
 </div>
+
+
+<%#=======================================================================================================%>
+<%#JAVASCRIPT %>
+
+<script> 
+
+    var messages= $("a.messages")
+    var div_mess = $("div.messages")
+
+   var participants =  $("a.view_participants")
+   var div_part = $("div.view_participants")
+
+   var files =  $("a.files")
+   var div_file = $("div.files")
+
+   messages.on("click",function(){
+        $(this).addClass("active")
+        div_mess.removeClass(" hidden menu")
+       participants.removeClass("active")
+       div_part.addClass(" hidden menu")
+       files.removeClass("active")
+       div_file.addClass("hidden menu")
+   });
+
+   participants.on("click",function(){
+        $(this).addClass("active")
+        div_part.removeClass(" hidden menu")
+       files.removeClass("active")
+       div_file.addClass(" hidden menu")
+       
+       messages.removeClass("active")
+       div_mess.addClass(" hidden menu")
+      
+   });
+
+   files.on("click",function(){
+       $(this).addClass("active")
+       div_file.removeClass("hidden menu")
+
+       participants.removeClass("active")
+       div_part.addClass(" hidden menu")
+
+       messages.removeClass("active")
+       div_mess.addClass("hidden menu")
+   });
+</script>
+<%#=======================================================================================================%>
