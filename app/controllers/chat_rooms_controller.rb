@@ -1,3 +1,4 @@
+require("pry")
 class ChatRoomsController < ApplicationController
 
 #     department_chat_rooms GET    /department/:department_id/chat_rooms(.:format)                                          chat_rooms#index
@@ -50,7 +51,11 @@ class ChatRoomsController < ApplicationController
     end
 
     def show 
+        @message = Message.new
         @chat_room =found_chat_room
+        # binding.pry
+        @messages = Message.where("chat_room_id = :chat_room",chat_room: @chat_room.id)
+        
         @department = found_department
     end
 

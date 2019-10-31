@@ -11,6 +11,7 @@ class User < ApplicationRecord
     has_one :department, through: :businesses
     has_many :chat_rooms, through: :department
     has_many :notifications, through: :department
+    has_many :messages
 
     def is_admin? 
         self.admin ? true : false

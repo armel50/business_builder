@@ -51,6 +51,9 @@ Rails.application.routes.draw do
   resources :project do
     resources :goals
   end
+  resources :chat_rooms do
+    resources :messages
+  end
 
   post "/submit_check_goals/:project_id", to: "goals#check_goal"
   patch "/department/4/projects", to: "projects#update"
