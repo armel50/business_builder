@@ -1,6 +1,8 @@
 require "pry"
 class BusinessesController < ApplicationController
 
+
+
     
   def create 
     
@@ -31,6 +33,25 @@ class BusinessesController < ApplicationController
     @business = Business.find(params[:id])
   end
 
+  def view_application
+
+    if current_user(session).admin
+      @business = Business.find_by(id: params[:id])
+      @businesses = Business.where("admin_id = :admin_id",  admin_id: current_user(session).id)
+      @applications = Application.where("business_id = :business_id", business_id: @business.id)
+      @applicants = []
+      if @applications 
+        @applications.each do |application|
+          @applicants << application.user
+        end
+        render "businesses/view_new_applicants"
+      end
+    else 
+      flash[:notice] = "You're not allowed to see those content."
+      redirect_to  current_user(session)
+    end
+  end
+
   def destroy 
     @business = Business.find(params[:id])
     #is_yours and current_user can be found in the helper folder. 
@@ -45,6 +66,45 @@ class BusinessesController < ApplicationController
     end
   end
 
+  def index
+    @application = Application.new
+    @businesses =  Business.all
+    # binding.pry
+  end
+
+
+  
+  # post "/businesses/:id/apply", to: "businesses#create_application"
+
+  
+  # delete "/businesses/:id/apply", to: "businesses#destroy_application"
+
+
+  def create_application 
+    @user = current_user(session)
+    @business = Business.find_by(id: params[:id])
+   if !@user.admin
+      @application = Application.create(business_id: @business.id, user_id: current_user(session).id)
+      # binding.pry
+      flash[:notice] = "Your application hass been successfully submitted to #{@business.name} business"
+   else 
+    flash[:notice] = "You are an administrator. Please log in without you admin account to apply to '#{@business.name}' business"
+   end
+   redirect_to "/businesses"
+  end
+
+
+
+  def destroy_application
+    @business = Business.find_by(id: params[:id])
+    application = Application.find_by(business_id: @business.id, user_id: current_user(session).id)
+    # binding.pry
+    flash[:notice] = "Your application has been successfully deleted"
+    
+    application.delete 
+    redirect_to "/businesses"
+  end
+
    private 
 
    def business_params 
@@ -55,4 +115,11 @@ class BusinessesController < ApplicationController
     params.require(:business).permit(categories:{})["categories"]
    end
   
+
+
+ 
+ 
+
+  private 
+ 
 end

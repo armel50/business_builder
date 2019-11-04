@@ -16,4 +16,4 @@ Categories
 <%end%>
 <%if current_user(session).admin && is_yours?(@business) %>
     <%= link_to "Delete #{@business.name}", "/admin/businesses/#{@business.id}",data: {:confirm => "Are you sure you want to delete #{@business.name}?"}, :method => :delete %>
-<%end%>
+<%end%>  

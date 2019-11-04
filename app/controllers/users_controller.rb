@@ -27,7 +27,7 @@ class UsersController < ApplicationController
             end
         else 
             @user = User.new(email: user_params[:email],password: user_params[:password])
-            render :login, :layout => "signup_login"
+            render "users/new", :layout => "signup_login"
         end
     end
 

@@ -1,3 +1,4 @@
+require "pry"
 module ApplicationHelper
     def loggin_page?(path)
         if path == "/users/new" || path == "/users"
@@ -31,4 +32,12 @@ module ApplicationHelper
             end
         end
     end
+
+    def already_applied(user, business)
+       exist =  Application.find_by(user_id: user.id, business_id: business.id)
+    #    binding.pry
+        exist ? true : false
+    end
 end
+
+

@@ -1,0 +1,21 @@
+this is the index
+<%@businesses.each do |business|%>
+
+   <br> <%= business.founder_name%><br>
+   <br> <%= business.name %><br>
+   <% if !current_user(session).admin%>
+    <% if !already_applied(current_user(session), business) %>
+       <%= link_to 'Apply to this businness', "/businesses/#{business.id}/apply" , method: :post %>
+       <% else %>
+        <%= link_to "Delete my application", "/businesses/#{business.id}/apply", method: :delete %>
+       <% end %>
+       <% end %>
+
+       <br> 
+       department<hr>
+    <%business.departments.each do |department|%>
+       <br> <%= department.name%>
+      
+    <%end%>
+
+<%end%>

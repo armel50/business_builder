@@ -4,9 +4,11 @@ class Business < ApplicationRecord
     validates :password, length: {minimum: 8}
     has_secure_password
     belongs_to :admin, class_name: "User", foreign_key: :admin_id
-    has_many :user_businesses
-    has_many :users, through: :user_businesses
+    has_many :applications
+    # has_many :user_businesses
+    # has_many :users, through: :user_businesses
     has_many :departments
+    has_many :users
     has_many :projects, through: :departments
     has_many :goals, through: :projects 
     has_many :chatrooms, through: :departments 

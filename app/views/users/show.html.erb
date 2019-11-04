@@ -1,0 +1,16 @@
+
+        <% if @business && @business.errors.any? %>
+        <div id="error_explanation" class= "ui floating message">
+        <h2>
+          <%= pluralize(@business.errors.count, "error") %>
+          prohibited the creation of this business:
+        </h2>
+    
+        <ul>
+        <% @business.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    

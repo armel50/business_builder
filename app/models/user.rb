@@ -7,8 +7,11 @@ class User < ApplicationRecord
 
     has_many :user_businesses
     has_many :businesses, through: :user_businesses
+    has_many :departments, through: :businesses
+    has_many :applications
+    has_many :user_departments 
+    has_many :departments, through: :user_departments
 
-    has_one :department, through: :businesses
     has_many :chat_rooms, through: :department
     has_many :notifications, through: :department
     has_many :messages
