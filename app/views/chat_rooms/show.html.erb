@@ -31,8 +31,14 @@
       
            <%@messages.each do |message|%>
                 <div>
+                
                     <%= message.content%><br>
+                    <% if message.file.attached? %>
+                      <%= link_to "Download file", message.file, download: "" %>
+                      <%end%>
+                    <br>
                     <%= link_to "Delete", "/chat_rooms/#{@chat_room.id}/messages/#{message.id}", method: :delete %>
+                    
                     <%= message.user.name %> <br>
                     <%= message.created_at%> <br>
                 </div>
@@ -45,7 +51,9 @@
         <div class = "ui container">
             <%=form_for @message ,url: "/chat_rooms/#{@chat_room.id}/messages" do |f|%>
                  <%= f.text_field :content%>
+                 <%=f.file_field :file %>
                  <%= f.submit "Send message"%>
+
             <%end%>
         </div>
       </div>
@@ -67,7 +75,10 @@
 
 <%#=======================================================================================================%>
       <div class = "view_participants">
-        all the participantssss
+      
+        <%@chat_room.department.users.each do |user|%>
+            <%= link_to user.name, user_path(user) %><%=user.name%><br>
+        <%end%>
       </div>
 <%#=======================================================================================================%>
 

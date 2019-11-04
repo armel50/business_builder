@@ -19,7 +19,6 @@ class MessagesController < ApplicationController
         # binding.pry
         @department = @chat_room.department
         if @message.save 
-            @chat_room.messages << @message 
             found_user.messages << @message 
             # binding.pry
         else 
@@ -46,6 +45,6 @@ class MessagesController < ApplicationController
     end
 
     def message_params 
-        params.require(:message).permit(:content)
+        params.require(:message).permit(:content,:file) 
     end
 end

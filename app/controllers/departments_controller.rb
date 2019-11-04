@@ -16,7 +16,7 @@ class DepartmentsController < ApplicationController
 
         user_department = UserDepartment.create(user_id: user.id, department_id: department.id)
         user.user_departments << user_department
-        if department.chatroom 
+        if department.chat_room 
           chatroom.users << user
         end
      

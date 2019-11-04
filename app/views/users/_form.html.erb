@@ -38,8 +38,11 @@
                 <% if @current_uri != "/logIn"%>
                 admin?  <%=f.check_box :admin%>
                 <%end%>
-
-                <%=f.submit "Sign Up", class: "ui fluid large teal submit button" %> 
+                <%if @current_uri == "/logIn"%>
+                <%=f.submit "Log In" , class: "ui fluid large teal submit button" %> 
+                <%else%>
+                    <%=f.submit "Sign Up" , class: "ui fluid large teal submit button" %> 
+                <%end%>
             </div>
         <%end%>
          <% if @current_uri == "/logIn"%>

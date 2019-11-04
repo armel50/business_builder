@@ -12,6 +12,8 @@
 <%= @department.name%> 
 <% if  @department.chat_room%>
 <br><%= link_to "Show the chatroom", department_chat_room_path(@department, @department.chat_room) %> <br>
+<%else%>
+<br><%= link_to 'Add A New Chatroom', new_department_chat_room_path(@department)%><br>
 <% end %>
 
  <br><%= link_to 'Add a new project',  new_department_project_path(@department) %><br>
