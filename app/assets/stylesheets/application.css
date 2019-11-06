@@ -67,14 +67,33 @@
     padding-bottom: 5em;
   }
 
-  .footer.segment {
+  div.footer.segment {
     padding: 5em 0em;
+    margin-top: 1000px;
   }
 
   .secondary.pointing.menu .toc.item {
     display: none;
   }
 
+  hr.style-seven {
+    overflow: visible; /* For IE */
+    height: 30px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+hr.style-seven:before { 
+  display: block;
+  content: "";
+  height: 30px;
+  margin-top: -31px;
+  border-style: solid;
+  border-color: black;
+  border-width: 0 0 1px 0;
+  border-radius: 20px;
+}
   @media only screen and (max-width: 700px) {
     .ui.fixed.menu {
       display: none !important;
@@ -98,3 +117,13 @@
       font-size: 1.5em;
     }
   }
+
+  .ui.vertical.segment.footer{
+    margin-top: 100px;
+   
+}
+
+.ui.vertical.segment.masthead{
+  margin-bottom: 100px;
+ 
+}

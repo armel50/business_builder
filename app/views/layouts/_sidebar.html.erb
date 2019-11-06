@@ -1,10 +1,19 @@
 <!-- Following Menu -->
+<%# This sidbar shows up with jQuery %>
 <div class="ui large top fixed hidden menu">
     <div class="ui container">
-            <a class="active item">Home</a>
-            <a class="item">Work</a>
-            <a class="item">Company</a>
-            <a class="item">Careers</a>
+            <a class="item" href = "/">Home</a>
+
+            <% if current_user(session) && current_user(session).admin  %>
+                <a class=" item" href ="/admin/businesses/new">Create a Company</a>
+            <%end%>
+            <%if current_user(session).businesses %>
+                <a class=" item" href= "/my_companies/<%=current_user(session).id%>">My Companies</a>
+            <%end%>
+            <% if  !current_user(session).admin  %>
+                <a class="item" href= "/businesses">Apply To Businesses</a>
+            <% end %>
+           
       
         <div class="right menu">
             <%if !session[:user_id]%>
@@ -45,10 +54,16 @@
                 <a class="toc item">
                 <i class="sidebar icon"></i>
                 </a>
-                <a class="main item">Home</a>
-                <a class="main item">Work</a>
-                <a class="main item">Company</a>
-                <a class="main item">Careers</a>
+                <a class="main item" href = "/">Home</a>
+                <% if current_user(session) && current_user(session).admin  %>
+                    <a class="main item" href ="/admin/businesses/new">Create a Company</a>
+                <%end%>
+                <%if current_user(session).businesses %>
+                    <a class="main item" href= "/my_companies/<%=current_user(session).id%>">My Companies</a>
+                <%end%>
+                <% if  !current_user(session).admin  %>
+                  <a class="main item" href= "/businesses">Apply To Businesses</a>
+                <% end %>
                 <div class="right item">
                 <% if !session[:user_id ]%>
                     <a class="ui inverted button" href="/logIn">Log in</a>
@@ -64,7 +79,12 @@
         Imagine-a-Company
       </h1>
       <h2>Do whatever you want when you want to.</h2>
-      <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
+      <%if current_user(session).admin %>
+        <a href="/admin/businesses/new"><div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div></a>
+      <%else%>
+            <a href="/businesses"><div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div></a>
+      <%end%>
+
     </div>
 
 </div>

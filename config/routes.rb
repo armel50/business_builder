@@ -54,14 +54,17 @@ Rails.application.routes.draw do
   resources :chat_rooms do
     resources :messages
   end
-  # get "/businesses/:id/apply", to: "businesses#new_application"
+
   post "/businesses/:id/apply", to: "businesses#create_application"
-  # patch "/businesses/:id/apply", to: "businesses#edit_application"
   delete "/businesses/:id/apply", to: "businesses#destroy_application"
 
   get "/businesses/:id/view_applicants", to: "businesses#view_application"
+
+
+
   post "/submit_check_goals/:project_id", to: "goals#check_goal"
   patch "/department/4/projects", to: "projects#update"
+  get "/my_companies/:user_id", to: "businesses#index"
 
   post "/add/:applicant_id/departments/:id", to: "departments#add_applicants"
 end

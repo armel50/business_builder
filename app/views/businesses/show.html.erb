@@ -1,19 +1,37 @@
-<%= link_to 'Add a new department',  new_admin_business_department_path(@business) %><br> <br>
-<%=@business.name %><br><br>
-<%= @business.founder_name%><br><br>
-Active since: <%=@business.created_at%><br><br>
+
+<%= link_to 'Add a new department', new_admin_business_department_path(@business) ,class: "ui positive basic button floated right"%><br> <br>
+<h1 class = "ui header center aligned"><%=@business.name.capitalize %></h1>
+
+<hr class = "style-seven">
+
+
+<div class="ui piled segment">
+  <h4 class="ui header">About <%= @business.name.capitalize %></h4>
+  <p>Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. Usu ocurreret referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque electram, eos choro alterum definiebas in. Vim dolorum definiebas an. Mei ex natum rebum iisque.</p>
+   <p>Audiam quaerendum eu sea, pro omittam definiebas ex. Te est latine definitiones. Quot wisi nulla ex duo. Vis sint solet expetenda ne, his te phaedrum referrentur consectetuer. Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
+   <p>Eu quo homero blandit intellegebat. Incorrupte consequuntur mei id. Mei ut facer dolores adolescens, no illum aperiri quo, usu odio brute at. Qui te porro electram, ea dico facete utroque quo. Populo quodsi te eam, wisi everti eos ex, eum elitr altera utamur at. Quodsi convenire mnesarchum eu per, quas minimum postulant per id.</p>
+</div>
+
+<p>Created by <%= @business.founder_name%> in <%= @business.created_at.strftime("%B, %Y")%></p><br>
  
-Departments 
-<hr>
+<h1 class = "ui header center aligned" >Departments </h1>
+<hr class = "style-seven">
+<%if !@business.departments.empty?%>
 <% @business.departments.each do |department|%>
    <br> <%=department.name%> <%= link_to "#{department.name}", department_path(department) %>
 <%end%>
+<%else%>
+<div class="ui raised segment">
+  <p>Please add new departments to get the most out of this app.</p>
+</div>
+<%end%>
 <br> <br> <br>
-Categories
-<hr>
+<h1 class = "ui header center aligned" >Categories</h1>
+<hr class = "style-seven">
 <% @business.categories.each do |category|%>
    <br> <%=category.name%> 
 <%end%>
+<br><br><br>
 <%if current_user(session).admin && is_yours?(@business) %>
-    <%= link_to "Delete #{@business.name}", "/admin/businesses/#{@business.id}",data: {:confirm => "Are you sure you want to delete #{@business.name}?"}, :method => :delete %>
+    <%= link_to "Delete #{@business.name}", "/admin/businesses/#{@business.id}",data: {:confirm => "Are you sure you want to delete #{@business.name}?"}, :method => :delete , class:"ui right floated negative button"%>
 <%end%>  

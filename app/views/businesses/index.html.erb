@@ -1,21 +1,69 @@
-this is the index
+<h1 class = "ui header center aligned">Apply to millions of companies!</h1>
+<hr class = "style-seven ">
+<div class = "ui grid">
 <%@businesses.each do |business|%>
-
-   <br> <%= business.founder_name%><br>
-   <br> <%= business.name %><br>
-   <% if !current_user(session).admin%>
-    <% if !already_applied(current_user(session), business) %>
-       <%= link_to 'Apply to this businness', "/businesses/#{business.id}/apply" , method: :post %>
-       <% else %>
-        <%= link_to "Delete my application", "/businesses/#{business.id}/apply", method: :delete %>
-       <% end %>
-       <% end %>
-
-       <br> 
-       department<hr>
-    <%business.departments.each do |department|%>
-       <br> <%= department.name%>
+<div class = "ui five wide column ">
+<div class="ui special cards ">
+  <div class="card">
+    <div class="blurring dimmable image">
+      <div class="ui dimmer">
+        <div class="content">
+          <div class="center">
+            <div class="ui inverted button">
+               <% if !current_user(session).admin %>
+                     <% if !already_applied(current_user(session), business) %>
+                        <%= link_to 'Apply to this businness', "/businesses/#{business.id}/apply" , method: :post %>
+                     <% else %>
+                        <%= link_to "Delete my application", "/businesses/#{business.id}/apply", method: :delete %>
+                     <% end %>
+            
+               <%else%>
+                  You Are An Admin
+               <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1556740772-1a741367b93e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80">
+    </div>
+    <div class="content">
+      <a class="header"><%=business.name%></a>
+      <div class="meta">
+        <span class="date">Created in <%=business.created_at.strftime("%B, %Y") %> by <%= business.admin.name if business.admin%></span>
+      </div>
+    </div>
+    <div class="extra content">
+      <a>
+        <i class="users icon"></i>
+        <%=pluralize(business.users.size,"Member")%>
+      </a>
+      <br>
+       <a>
+        <i class="users icon"></i>
+        <%=pluralize(business.departments.size,"Department")%>
+      </a>
+      <br>
+       <%if current_user(session) == business.admin || business.users.include?(current_user(session))%>
+       <% if current_user(session) == business.admin %>
+         <a href= "/businesses/<%=business.id%>/view_applicants"> <%=pluralize(business.applications.size,"people") %> applied to this business</a><br>
+      <%end%>
+         <a class = "ui button primary" href ="/businesses/<%=business.id%>">See Business</a>
+      <%end%>
       
-    <%end%>
+    </div>
+  </div>
+</div>
+</div>
 
 <%end%>
+</div>
+
+
+<script> 
+$('.special.cards .image').on("mouseenter", function(){
+   $(this).dimmer("show")
+});
+$('.special.cards .image').on("mouseleave", function(){
+   $(this).dimmer("hide")
+});
+</script>

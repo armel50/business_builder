@@ -4,7 +4,6 @@ class DepartmentsController < ApplicationController
     # get "/add/:applicant_id/departments/:id", to: "departments#add_applicants"
     def show 
         @department = Department.find(params[:id])
-       
     end
 
     def add_applicants 
@@ -24,7 +23,7 @@ class DepartmentsController < ApplicationController
        application =  Application.find_by(user_id: user.id, business_id: department.business.id).destroy
        
         flash[:notice] = "#{user.name} is now part of #{department.name} department"
-        binding.pry
+        # binding.pry
         redirect_to "/businesses/#{department.business.id}/view_applicants"
     
     end

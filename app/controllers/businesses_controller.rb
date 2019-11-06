@@ -67,8 +67,16 @@ class BusinessesController < ApplicationController
   end
 
   def index
-    @application = Application.new
-    @businesses =  Business.all
+    if !params[:user_id]
+      @application = Application.new
+      @businesses =  Business.all
+    else
+     @businesses =  current_user(session).businesses
+     if @businesses.empty?
+        flash[:notice] = "You do not have a business yet. If you are an admin set up your business, otherwise apply to a business." 
+        redirect_to "/businesses"
+     end
+    end 
     # binding.pry
   end
 

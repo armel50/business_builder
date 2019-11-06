@@ -4,7 +4,6 @@ class  Admin::BusinessesController < ApplicationController
 
         if user.is_admin?
             @business = Business.new
-            
         else
             flash[:fail] = "You need to register as an admin to create a business."
             redirect_to user_path(user)
