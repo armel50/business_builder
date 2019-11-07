@@ -1,5 +1,11 @@
 <h1 class = "ui header center aligned">Apply to millions of companies!</h1>
+
 <hr class = "style-seven ">
+<%if @search_term && @businesses.empty?%>
+   <div class = "ui raised segment">
+      <p>Sorry! We could not find a business named "<%= @search_term %>"". Please try again!</p>
+   </div>
+<%end%>
 <div class = "ui grid">
 <%@businesses.each do |business|%>
 <div class = "ui five wide column ">

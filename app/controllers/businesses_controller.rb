@@ -67,16 +67,21 @@ class BusinessesController < ApplicationController
   end
 
   def index
-    if !params[:user_id]
-      @application = Application.new
-      @businesses =  Business.all
-    else
-     @businesses =  current_user(session).businesses
-     if @businesses.empty?
-        flash[:notice] = "You do not have a business yet. If you are an admin set up your business, otherwise apply to a business." 
-        redirect_to "/businesses"
-     end
+    if  !params.permit("business_name")["business_name"].empty?
+     @businesses = Business.where("name like ?", "%#{params.permit("business_name")["business_name"]}%")
+      @search_term = params.permit("business_name")["business_name"]
+     @application = Application.new
+      elsif !params[:user_id]
+        @application = Application.new
+        @businesses =  Business.all
+      elsif params[:user_id]
+      @businesses =  current_user(session).businesses
+      if @businesses.empty?
+          flash[:notice] = "You do not have a business yet. If you are an admin set up your business, otherwise apply to a business." 
+          redirect_to "/businesses"
+      end
     end 
+
     # binding.pry
   end
 

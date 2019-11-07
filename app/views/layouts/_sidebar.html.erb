@@ -24,7 +24,6 @@
                     <a class="ui primary button">Sign Up</a>
                 </div>
             <%end%>
-
                 <%= display_logout "ui primary button"%>
             </div>
         
@@ -65,6 +64,27 @@
                   <a class="main item" href= "/businesses">Apply To Businesses</a>
                 <% end %>
                 <div class="right item">
+                <div class="ui fluid category search">
+                <div class="ui icon input">
+                 
+                    <input class="prompt" type="text" placeholder="Search Businesses by Name" list = "businesses_autocomplete"><i class="search icon"></i>
+                    
+                <datalist id="businesses_autocomplete">
+                    <% Business.all.each do |business| %>
+                        <option value="<%= business.name %>">
+                    <% end %>
+                </datalist>
+                <%# this is an hidden form %>
+                <div class = "hidden menu" id = "search_bar_form">
+                    <%=form_tag("/businesses", {:method => :get})  do %>
+                        <%= text_field_tag :business_name%>
+                        <%=submit_tag%>
+                    <%end%>
+                </div>
+
+                </div>
+                <div class="results"></div>
+                </div>
                 <% if !session[:user_id ]%>
                     <a class="ui inverted button" href="/logIn">Log in</a>
                     <a class="ui inverted button" href="/users/new">Sign Up</a>
@@ -88,3 +108,24 @@
     </div>
 
 </div>
+
+<script> 
+    $(document).ready(function(){
+       input = $("input#business_name")
+      search =  $("input.prompt");
+      form = $("div#search_bar_form form")
+      search.on("keypress", function(e){
+          search.focus()
+          if(e.which !== 13  ){
+             
+             
+        }else{
+            input.val(search.val())
+            form.submit()
+          }
+
+
+          
+      })
+    })
+</script>
