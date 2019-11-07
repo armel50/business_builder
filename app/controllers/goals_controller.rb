@@ -19,8 +19,7 @@ class GoalsController < ApplicationController
                 @project.goals << @goal
                 @project.progression_update
             else
-                render "goals/new" 
-                
+                render "goals/new"    
             end
         end 
 

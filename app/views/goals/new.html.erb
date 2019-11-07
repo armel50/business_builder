@@ -1,11 +1,12 @@
-<h1>You are about to add a goal to a project!!1 </h1>
+<h1 class = "ui header center aligned">Add A New Goal</h1>
+<hr class = "style-seven">
 
 
 
 <%= form_for @goal, html: {:class => "ui large form" }, url: "/project/#{@project.id}/goals" do |f|%>
     <div class= "field">
-        <%=f.text_field :content %>
+        <%=f.text_field :content, placeholder: "Enter The New Goal" %>
     </div>
 
-    <%= f.submit "Create goal"%>
+    <%= f.submit "Create Goal", class: "ui button primary fluid"%>
 <%end%>

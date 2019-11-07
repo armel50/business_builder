@@ -1,100 +1,73 @@
-<h1>This is supposed to be the chat room</h1>
-
-<%=@chat_room.title%> <br>
-<%= link_to "Edit change the title", edit_department_chat_room_path(@department,@chat_room) %>
-<br>
-<%if current_user(session) == @chat_room.department.business.admin%>
-   <%= link_to "Delete #{@chat_room.title}", "/department/#{@department.id}/chat_rooms/#{@chat_room.id}", method: "delete", data: {confirm: "Are you sure you want to delete this chat room"} %>
- <%end%>
+<h1 class = "ui header center aligned">Instant Chat: <%=@chat_room.title.capitalize%> <%= link_to "Edit Chat Room Name", edit_department_chat_room_path(@department,@chat_room), class: "ui button yellow right floated" %> </h1>
+<hr class = "style-seven">
 
 
  <div class="ui grid">
-  <div class="four wide column">
+  <div class="four wide column" >
     <div class="ui vertical fluid tabular menu">
-      <a class="item messages active">
-        Messages
-      </a>
-      <a class="item files">
-        <%= @chat_room.title%>'s shared files
-      </a>
-
-      <a class="item view_participants">
-        View participants
-      </a>
+      <a class="item messages active"> Messages</a>
+      <a class="item files"><%= @chat_room.title%>'s shared files </a>
+      <a class="item view_participants"> View participants</a>
     </div>
   </div>
-  <div class="twelve wide stretched column">
-    <div class="ui segment">
-      This is an stretched grid column. This segment will always match the tab height
+  <div class="twelve wide stretched column chatroom" style= "height: 400px" >
+    <div class="ui segment scroller">
+    
 <%#=======================================================================================================%>
-      <div class = "messages ui container">
-
-        <div class = "ui container" >
-      
-           <%@messages.each do |message|%>
-                <div>
-                
-                    <%= message.content%><br>
-                    <% if message.file.attached? %>
-                      <span><%= link_to "Download file", message.file, download: "" %> <i class="download icon"></i></span>
-                      <%end%>
-                    <br>
-                    <%if current_user(session) == message.user%>
-                    <%= link_to "Delete", "/chat_rooms/#{@chat_room.id}/messages/#{message.id}", method: :delete %>
-                    <% end %>
-                    
-                    <%= message.user.name %> <br>
-                    <%= message.created_at %> <br>
-                </div>
-
-                <br> <br> <br>
-                 
-            <%end%>
-        
+        <div class = "messages ui container " >
+            <%@messages.each do |message|%>
+                <%= render 'messages/message',  message: message %>
+                  <br> <br> 
+              <%end%>
         </div>
-        <div class = "ui container">
-            <%=form_for @message ,url: "/chat_rooms/#{@chat_room.id}/messages" do |f|%>
-                 <%= f.text_field :content%>
-                 <button>
-                 <%=f.label :file, "Upload file"%>
-                 </button>
-                 <%=f.file_field :file %>
-                 <%= f.submit "Send message"%>
+    
+<%#=======================================================================================================%>
 
+
+
+<%#=======================================================================================================%>
+      <div class = "files ui container hidden menu">
+            <%@files.each do |file|%>
+            <span><%= link_to "Download File", file.file, download: "" %> <i class="download icon"></i></span>
+              
+              Uploaded by  <%= file.user.name.capitalize %> On: <%= file.created_at.strftime("%A, %d %B %Y") %>
             <%end%>
-        </div>
-      </div>
-<%#=======================================================================================================%>
-
-
-
-<%#=======================================================================================================%>
-      <div class = "files ui container">
-            filesssssssssss
-
       </div>
  <%#=======================================================================================================%>
 
 
 
 
-
-
 <%#=======================================================================================================%>
-      <div class = "view_participants">
-      
-        <%@chat_room.department.users.each do |user|%>
-            <%= link_to user.name, user_path(user) %><%=user.name%><br>
-        <%end%>
+      <div class = "view_participants hidden menu">
+          <h3><%=@chat_room.title.capitalize%> has <%=pluralize(@chat_room.department.users.size ,"participant")%><h3>
+          <%@chat_room.department.users.each do |user|%>
+              <%= link_to user.name, user_path(user) %><br>
+          <%end%>
       </div>
 <%#=======================================================================================================%>
-
-
-
     </div>
-  </div>
-</div>
 
+      <div class = "ui container">
+            <%=form_for @message ,url: "/chat_rooms/#{@chat_room.id}/messages" do |f|%>
+            <div class="ui  fluid right labeled input">
+                 <%= f.text_field :content, placeholder: "Enter a message"%>
+                  <div class="ui button primary">
+                      <label for = "message_file" ><i class="cloud upload icon"></i> Upload<label>
+                      <%=f.file_field :file, class: "hidden menu"%>
+                  </div>
+            </div>
+                 <%= f.submit "Send message",class: "hidden menu" %>
+            <%end%>
+        </div>
+     
+  </div>
+  
+  </div>
+  <br>
+  <%if current_user(session) == @chat_room.department.business.admin%>
+   <%= link_to "Delete #{@chat_room.title}", "/department/#{@department.id}/chat_rooms/#{@chat_room.id}", method: "delete", data: {confirm: "Are you sure you want to delete this chat room"}, class: "ui left floated button negative"%>
+ <%end%>
 
 <%#=======================================================================================================%>
 <%#JAVASCRIPT %>

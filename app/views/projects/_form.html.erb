@@ -1,5 +1,6 @@
-This is the form from projects/form
-
+  <h1 class = "ui header center aligned">Add A New Project</h1>
+  <hr class = "style-seven">
+<%# In the case there is an error, the following code will display it %>
  <% if @project && @project.errors.any? %>
         <div id="error_explanation" class= "ui floating message">
         <h2>
@@ -13,7 +14,7 @@ This is the form from projects/form
         <% end %>
         </ul>
       </div>
-    <% end %>
+  <% end %>
 
 
 <%=form_for @project ,:html => {:class => "ui large form" }, url: "/department/#{@department.id}/projects"  do |f|%>
@@ -28,5 +29,5 @@ This is the form from projects/form
         <%= f.text_area :description %>
     </div>
     
-    <%=f.submit "Create Project"%>
+    <%=f.submit "Create Project", class:"ui button fluid primary"%>
 <%end%>

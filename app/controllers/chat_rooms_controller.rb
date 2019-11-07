@@ -13,7 +13,6 @@ class ChatRoomsController < ApplicationController
     def new 
         @chat_room = ChatRoom.new
         @department = found_department 
-
     end
 
     def create
@@ -51,10 +50,16 @@ class ChatRoomsController < ApplicationController
     end
 
     def show 
+        @files = []
         @message = Message.new
         @chat_room =found_chat_room
-        # binding.pry
+    
         @messages = Message.where("chat_room_id = :chat_room",chat_room: @chat_room.id)
+
+        @messages.each do |message|
+            @files << message if message.file.attached?
+        end
+       
         
         @department = found_department
     end

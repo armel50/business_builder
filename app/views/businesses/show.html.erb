@@ -1,9 +1,18 @@
+<div class = "ui grid">
+<div class = "ui four wide column">
+    <address>
+        <%= @business.country%>, <%= @business.state%><br>
+        <%= @business.city%>
+        <%= @business.street_name%>
+    </address>
 
-<%= link_to 'Add a new department', new_admin_business_department_path(@business) ,class: "ui positive basic button floated right"%><br> <br>
+<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=france&key=AIzaSyCtPD90O4hIK9oLVJBiIbmKbm-QT5JHDC4" allowfullscreen></iframe>
+</div>
+<div class = "ui twelve wide column">
+        
 <h1 class = "ui header center aligned"><%=@business.name.capitalize %></h1>
 
 <hr class = "style-seven">
-
 
 <div class="ui piled segment">
   <h4 class="ui header">About <%= @business.name.capitalize %></h4>
@@ -13,25 +22,33 @@
 </div>
 
 <p>Created by <%= @business.founder_name%> in <%= @business.created_at.strftime("%B, %Y")%></p><br>
- 
-<h1 class = "ui header center aligned" >Departments </h1>
+
+<h1 class = "ui header center aligned" >Departments <%= link_to 'Add a new department', new_admin_business_department_path(@business),class: "ui positive basic button right floated "%></h1>
+
 <hr class = "style-seven">
 <%if !@business.departments.empty?%>
+
 <% @business.departments.each do |department|%>
-   <br> <%=department.name%> <%= link_to "#{department.name}", department_path(department) %>
+    <h3 class = "ui center aligned header"> <%= link_to "#{department.name.capitalize} department", department_path(department)  %> </h3>
 <%end%>
+
 <%else%>
-<div class="ui raised segment">
-  <p>Please add new departments to get the most out of this app.</p>
-</div>
+    <div class="ui raised segment">
+        <p>Please add new departments to get the most out of this app.</p>
+    </div>
 <%end%>
-<br> <br> <br>
+ <br>
 <h1 class = "ui header center aligned" >Categories</h1>
 <hr class = "style-seven">
-<% @business.categories.each do |category|%>
-   <br> <%=category.name%> 
-<%end%>
+
+    <% @business.categories.each do |category|%>
+         <h3 class = "ui header center aligned"> <%=category.name.capitalize%> </h3>    
+    <%end%>
+
 <br><br><br>
+
 <%if current_user(session).admin && is_yours?(@business) %>
     <%= link_to "Delete #{@business.name}", "/admin/businesses/#{@business.id}",data: {:confirm => "Are you sure you want to delete #{@business.name}?"}, :method => :delete , class:"ui right floated negative button"%>
 <%end%>  
+</div>
+</div>

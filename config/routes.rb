@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     resources :messages
   end
 
+  mount ActionCable.server => "/cable"
   post "/businesses/:id/apply", to: "businesses#create_application"
   delete "/businesses/:id/apply", to: "businesses#destroy_application"
 
