@@ -1,21 +1,16 @@
+require "pry"
 class MessageBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(message)
-    # Do something later
-    ActionCable.server.broadcast "chat_channel", {
-      message: render_message(message)
-    }
+     ActionCable.server.broadcast "chat_#{message.chat_room.id}_channel", render_message(message)
+       #  binding.pry
   end
 
-  private 
+  private
+
   def render_message(message)
-    ChatRoomsController.render (
-    {partial: "chat_rooms/partials",
-      locals: {
-        message: message
-      }
-    }
-    )
+    ApplicationController.render message
   end
+
 end

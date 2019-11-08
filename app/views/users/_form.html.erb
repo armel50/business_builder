@@ -8,6 +8,15 @@
             </div>
         </h2>
         
+           <% if flash[:notice]%>
+            <div class="ui message">
+                <i class="close icon"></i>
+                <div class="header">
+                <%=flash[:notice]%>
+                </div>
+                <p>This is a special notification which you can dismiss if you're bored with it.</p>
+            </div>
+         <%end%>
         <%= form_for user ,:html => {:class => "ui large form" }, url: @current_uri  do |f|%>
         
    

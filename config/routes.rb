@@ -1,20 +1,18 @@
 Rails.application.routes.draw do
-  resources :messages
-  resources :shared_files
-  resources :notifications
-  resources :chat_rooms
-  resources :goals
+  # resources :messages
+  # resources :shared_files
+  # resources :notifications
+  # resources :chat_rooms
+  # resources :goals
   resources :projects
-  resources :businesses
-  resources :departments, only: [:index, :show, :new,:create,:update,:edit,:destroy]
+  resources :businesses, only: [:show,:create,:update,:index]
+  resources :departments, only: [:show]
   resources :users, only: [:index,:show,:create,:new,:edit,:destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :admin do
     resources :businesses, only: [:index,:show,:new,:create,:update,:edit,:destroy]  
     resources :projects, only: [:index, :show, :new,:create,:update,:edit,:destroy]
     resources :chat_rooms, only: [:index, :show, :new,:create,:update,:edit,:destroy]
-  
-    
   end
 
     root "application#home"
@@ -36,12 +34,6 @@ Rails.application.routes.draw do
   get '/businesses/:business_id/departments/new', to: "admin/departments#new", as: :new_admin_business_department
 
 
-  # post '/businesses/:business_id/projects', to: "admin/departments#create"
-  # patch '/businesses/:business_id/projects', to: "admin/departments#update"
-  # delete '/businesses/:business_id/projects/:id/delete', to: "admin/departments#destroy"
-  # get '/businesses/:business_id/projects', to: "admin/departments#index"
-  # get '/businesses/:business_id/project/:id/edit', to: "admin/departments#edit"
-  # get '/businesses/:business_id/projects/new', to: "admin/departments#new"
 
   resources :department do
     resources :projects

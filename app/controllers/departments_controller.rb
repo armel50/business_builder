@@ -15,15 +15,11 @@ class DepartmentsController < ApplicationController
 
         user_department = UserDepartment.create(user_id: user.id, department_id: department.id)
         user.user_departments << user_department
-        if department.chat_room 
-          chatroom.users << user
-        end
-     
 
        application =  Application.find_by(user_id: user.id, business_id: department.business.id).destroy
        
         flash[:notice] = "#{user.name} is now part of #{department.name} department"
-        # binding.pry
+    # binding.pry
         redirect_to "/businesses/#{department.business.id}/view_applicants"
     
     end

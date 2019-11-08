@@ -1,4 +1,4 @@
- <div class = "ui raised segment">
+ <div class = "message ui raised segment">
     <%= message.content%><br>
     <% if message.file.attached? %>
         <span><%= link_to "Download file", message.file, download: "" %> <i class="download icon"></i></span>
@@ -7,7 +7,5 @@
     <%if current_user(session) == message.user%>
         <%= link_to "Delete", "/chat_rooms/#{@chat_room.id}/messages/#{message.id}", method: :delete %>
     <% end %>
-   
-   
  </div>
-  <small>By <%= message.user.name %> on <%= message.created_at.strftime("%A, %d %B at %k:%M %P")%></small>
+  <small class = "ui right aligned">By <%= message.user.name %> on <%= message.created_at.strftime("%A, %d %B at %k:%M %P")%></small>

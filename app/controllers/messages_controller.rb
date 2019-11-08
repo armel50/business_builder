@@ -11,6 +11,7 @@ class MessagesController < ApplicationController
 #     DELETE /chat_rooms/:chat_room_id/messages/:id(.:format)                                         messages#destroy
 
     def create 
+        binding.pry
         @message = Message.new(message_params)
         @message.user = found_user
 

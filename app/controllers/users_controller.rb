@@ -20,12 +20,17 @@ class UsersController < ApplicationController
         if @user 
             if @user.authenticate(user_params[:password])
                 session[:user_id] = @user.id
+                cookies.encrypted[:user_id] = @user.id
                 redirect_to @user
             else
+                @current_uri = request.env['PATH_INFO']
                 @user = User.new(email: user_params[:email],password: user_params[:password])
-                render :login, :layout => "signup_login"  
+                flash[:notice] = "Wrong email or password"
+                render "users/new", :layout => "signup_login"  
             end
         else 
+            @current_uri = request.env['PATH_INFO']
+            flash[:notice] = "Wrong email or password"
             @user = User.new(email: user_params[:email],password: user_params[:password])
             render "users/new", :layout => "signup_login"
         end
@@ -34,7 +39,11 @@ class UsersController < ApplicationController
     def create 
         @user = User.new(user_params)
         if @user.save
+            # env['warden'].user = @user
+
             session[:user_id] = @user.id
+            cookies.encrypted[:user_id] = @user.id
+
             redirect_to @user 
         else 
             render :new, :layout => "signup_login"
@@ -43,6 +52,9 @@ class UsersController < ApplicationController
 
     def logout 
         session.clear
+        # env['warden'].user = nil
+        cookies.encrypted[:user_id] = nil
+
         redirect_to root_path
     end
 

@@ -7,10 +7,10 @@
             <% if current_user(session) && current_user(session).admin  %>
                 <a class=" item" href ="/admin/businesses/new">Create a Company</a>
             <%end%>
-            <%if current_user(session).businesses %>
+            <%if current_user(session) && current_user(session).businesses %>
                 <a class=" item" href= "/my_companies/<%=current_user(session).id%>">My Companies</a>
             <%end%>
-            <% if  !current_user(session).admin  %>
+            <% if  current_user(session) && !current_user(session).admin  %>
                 <a class="item" href= "/businesses">Apply To Businesses</a>
             <% end %>
            
@@ -57,10 +57,10 @@
                 <% if current_user(session) && current_user(session).admin  %>
                     <a class="main item" href ="/admin/businesses/new">Create a Company</a>
                 <%end%>
-                <%if current_user(session).businesses %>
+                <%if current_user(session) && current_user(session).businesses %>
                     <a class="main item" href= "/my_companies/<%=current_user(session).id%>">My Companies</a>
                 <%end%>
-                <% if  !current_user(session).admin  %>
+                <% if  current_user(session) && !current_user(session).admin  %>
                   <a class="main item" href= "/businesses">Apply To Businesses</a>
                 <% end %>
                 <div class="right item">
@@ -77,7 +77,7 @@
                 <%# this is an hidden form %>
                 <div class = "hidden menu" id = "search_bar_form">
                     <%=form_tag("/businesses", {:method => :get})  do %>
-                        <%= text_field_tag :business_name%>
+                        <%= text_field_tag :business_name1  %>
                         <%=submit_tag%>
                     <%end%>
                 </div>
@@ -99,7 +99,7 @@
         Imagine-a-Company
       </h1>
       <h2>Do whatever you want when you want to.</h2>
-      <%if current_user(session).admin %>
+      <%if current_user(session) && current_user(session).admin %>
         <a href="/admin/businesses/new"><div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div></a>
       <%else%>
             <a href="/businesses"><div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div></a>
@@ -111,7 +111,7 @@
 
 <script> 
     $(document).ready(function(){
-       input = $("input#business_name")
+       input = $("input#business_name1")
       search =  $("input.prompt");
       form = $("div#search_bar_form form")
       search.on("keypress", function(e){

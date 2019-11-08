@@ -2,8 +2,6 @@ require "pry"
 class BusinessesController < ApplicationController
 
 
-
-    
   def create 
     
     @user = User.find_by(id: session[:user_id])
@@ -52,24 +50,24 @@ class BusinessesController < ApplicationController
     end
   end
 
-  def destroy 
-    @business = Business.find(params[:id])
-    #is_yours and current_user can be found in the helper folder. 
-    #to use an helper in the controller you need to include the name of the module in the controller: "include UsersHelper"
-    if is_yours?(@business)
-        flash[:notice] = "Your business #{@business.name} has been sucessfully deleted."
-        @business.delete 
-        redirect_to root_path
-    else 
-        flash[:error] = "#{@business.name} business is not yours."
-        redirect_to root_path
-    end
-  end
+  # def destroy 
+  #   @business = Business.find(params[:id])
+  #   #is_yours and current_user can be found in the helper folder. 
+  #   #to use an helper in the controller you need to include the name of the module in the controller: "include UsersHelper"
+  #   if is_yours?(@business)
+  #       flash[:notice] = "Your business #{@business.name} has been sucessfully deleted."
+  #       @business.delete 
+  #       redirect_to root_path
+  #   else 
+  #       flash[:error] = "#{@business.name} business is not yours."
+  #       redirect_to root_path
+  #   end
+  # end
 
   def index
-    if  !params.permit("business_name")["business_name"].empty?
-     @businesses = Business.where("name like ?", "%#{params.permit("business_name")["business_name"]}%")
-      @search_term = params.permit("business_name")["business_name"]
+    if  params.permit("business_name1")["business_name1"]
+     @businesses = Business.where("name like ?", "%#{params.permit("business_name1")["business_name1"]}%")
+      @search_term = params.permit("business_name1")["business_name1"]
      @application = Application.new
       elsif !params[:user_id]
         @application = Application.new
