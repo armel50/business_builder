@@ -108,24 +108,3 @@
     </div>
 
 </div>
-
-<script> 
-    $(document).ready(function(){
-       input = $("input#business_name1")
-      search =  $("input.prompt");
-      form = $("div#search_bar_form form")
-      search.on("keypress", function(e){
-          search.focus()
-          if(e.which !== 13  ){
-             
-             
-        }else{
-            input.val(search.val())
-            form.submit()
-          }
-
-
-          
-      })
-    })
-</script>

@@ -1,6 +1,7 @@
 <h1>Edit a chat here</h1>
+<hr class = "style-seven">
 
 <%= form_for @chat_room , html: {class:  "ui large form" }, url: "/department/#{@department.id}/chat_rooms/#{@chat_room.id}" do |f|%>
     <%=f.text_field :title , placeholder: "Title"%>
-    <%=f.submit "Edit chat room"%>
+    <%=f.submit "Edit chat room", class: "ui yellow button fluid"%>
 <%end%>

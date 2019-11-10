@@ -1,4 +1,3 @@
-require "pry"
 class Project < ApplicationRecord
     has_many :goals 
     belongs_to :department
@@ -11,7 +10,6 @@ class Project < ApplicationRecord
       
         if total_goals.size > 0 
            result =  (completed.size.to_f / total_goals.size.to_f) * 100
-        #    binding.pry
            self.update(progression: result)
         end 
     end

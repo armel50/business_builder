@@ -1,5 +1,6 @@
-<h1>Create a new chat rooommmmm</h1>
+<h1 class = "ui header center aligned">Create a new chat</h1>
+<hr class = "style-seven">
 <%= form_for @chat_room , html: {class:  "ui large form" }, url: "/department/#{@department.id}/chat_rooms" do |f|%>
     <%=f.text_field :title , placeholder: "Title"%>
-    <%=f.submit "Create chat room"%>
+    <%=f.submit "Create chat room", class: "ui primary button fluid"%>
 <%end%>

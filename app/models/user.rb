@@ -13,7 +13,6 @@ class User < ApplicationRecord
     has_many :departments, through: :user_departments
 
     has_many :chat_rooms, through: :department
-    has_many :notifications, through: :department
     has_many :messages
 
     def is_admin? 

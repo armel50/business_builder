@@ -1,9 +1,0 @@
-<%= @business.name%> <br> <br>
-<%@departments.each do |department| %>
-    <%=department.name%> <br> <br>
-    <%= link_to "Show my #{department.name} department", department_path(department) %> <br>
-<%end%>
-
-<br> <br> 
-
-<%= link_to 'Add a new department',  new_admin_business_department_path(@business) %>

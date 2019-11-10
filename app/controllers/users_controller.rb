@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-    # skip_before_action :logged_in?, only: [:new,:create]
+    skip_before_action :logged_in?, only: [:new,:create, :login,:check_user_for_loggin]
     #this is for a user who do not exist in the database
     def new 
         @user = User.new

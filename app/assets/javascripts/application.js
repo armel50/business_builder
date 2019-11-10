@@ -41,4 +41,16 @@ $(document).ready(function() {
     $(this).closest('.message').transition('fade out');
   });
 
+  var input = $("input#business_name1")
+  var search =  $("input.prompt");
+  var form = $("div#search_bar_form form")
+  search.on("keypress", function(e){
+      search.focus()
+      if(e.which !== 13  ){   
+    }else{
+        input.val(search.val())
+        form.submit()
+      }
+  });
+
   });

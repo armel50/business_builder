@@ -1,5 +1,6 @@
 require 'securerandom'
 class SessionsController < ApplicationController 
+    skip_before_action :logged_in?, only: [:create_with_github]
     def create_with_github 
         user = User.find_by(email: auth["info"]["email"]) 
         if user
