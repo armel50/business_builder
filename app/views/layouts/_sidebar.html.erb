@@ -3,7 +3,9 @@
 <div class="ui large top fixed hidden menu">
     <div class="ui container">
             <a class="item" href = "/">Home</a>
-
+             <% if current_user(session)  %>
+                <a class="item" href ="/users/<%=current_user(session).id%>">Dashboard</a>
+            <%end%>
             <% if current_user(session) && current_user(session).admin  %>
                 <a class=" item" href ="/admin/businesses/new">Create a Company</a>
             <%end%>
@@ -54,6 +56,9 @@
                 <i class="sidebar icon"></i>
                 </a>
                 <a class="main item" href = "/">Home</a>
+                <% if current_user(session) %>
+                    <a class="main item" href ="/users/<%=current_user(session).id%>">Dashboard</a>
+                <%end%>
                 <% if current_user(session) && current_user(session).admin  %>
                     <a class="main item" href ="/admin/businesses/new">Create a Company</a>
                 <%end%>

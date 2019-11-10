@@ -1,31 +1,14 @@
-
-<% if @business && @business.errors.any? %>
-<div id="error_explanation" class= "ui floating message">
-<h2>
-  <%= pluralize(@business.errors.count, "error") %>
-  prohibited the creation of this business:
-</h2>
-
-<ul>
-<% @business.errors.full_messages.each do |msg| %>
-  <li><%= msg %></li>
-<% end %>
-</ul>
-</div>
-<% end %>
-  <% if @user == current_user(session)%>
-    <div class = "ui grid">
+<div class = "ui grid">
       <div class = "ui six wide column">
         <img src= "https://images.unsplash.com/photo-1533745848184-3db07256e163?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" height= "400" width = "400">
       </div>
       <div class = "ui ten wide column">
-        <h1 class = "ui header center aligned">Your are signed in as</h1>
+        <h1 class = "ui header center aligned">About <%= @user.name %></h1>
         <hr  class = "style-seven">
            <h3 class = "ui header center aligned">Username: <%= @user.name %></h3>
           <h3 class = "ui header center aligned">Email: <%= @user.email %></h3>
-          <br><br>
+          <br>  <br>
           
-             
         <h1 class = "ui header center aligned">Experience</h1>
         <hr  class = "style-seven">
         <div class="ui stacked segment">
@@ -33,42 +16,20 @@
         </div>
         <br>  <br>
 
-
           <h1 class = "ui header center aligned">Businesses</h1>
           <hr  class = "style-seven">
           <%if @user.businesses%>
             <%@user.businesses.each do |business|%>  
-              <h3 class = "ui header center aligned"><%= link_to "#{business.name.capitalize}", business_path(business) %> <small class = "ui mini">by <%=business.admin.name.capitalize%> </small></h3>
-             
-
+              <h3 class = "ui header center aligned"><%=business.name.capitalize%> <small class = "ui mini center aligned">by <%=business.admin.name.capitalize%> </small></h3>
             <%end%>
           <%else%>
             <div class = "ui raised segment">
               <p>You do not have a business yet. If you are an admin please create one otherwise apply to a business.</p>
             </div>
           <%end%>
-        <%if !@user.admin %>
-            <h1 class = "ui header center aligned">Businesses you applied to</h1>
-            <hr  class = "style-seven">
-            <%if !@applied_businesses.empty? %>
-            <%@applied_businesses.each do |business|%>
-              <h3 class = "ui header center aligned"><%=business.name%></h3>
-            <%end%>
-            <%else%>
-            <div class = "ui raised segment">
-                <p>You did not apply to a business yet.</p>
-              </div>
-          <%end%>
-
-        <%end%>
-
+      
       </div>
       
 
     
     </div>
-
-<%else%>
-    <%= render "users/visitors" %>
-<%end%>
-    

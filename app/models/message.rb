@@ -7,19 +7,19 @@ class Message < ApplicationRecord
     after_create_commit{
         MessageBroadcastJob.perform_later(self)
     }
-    # def attachment_name=(name)
-    #     @attachment_name = name
-    # end
+    def attachment_name=(name)
+        @attachment_name = name
+    end
     
-    # def attachment_name
-    #     @attachment_name
-    # end
+    def attachment_name
+        @attachment_name
+    end
 
-    # def attachment_data_uri=(name)
-    #     @attachment_data_uri = name
-    # end
+    def attachment_data_uri=(name)
+        @attachment_data_uri = name
+    end
     
-    # def attachment_data_uri
-    #     @attachment_data_uri
-    # end
+    def attachment_data_uri
+        @attachment_data_uri
+    end
 end
