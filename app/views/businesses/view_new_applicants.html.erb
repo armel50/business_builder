@@ -1,35 +1,48 @@
-<h1> If you are a business owner this is the guys who wants to get in</h1>
+<div class = "ui grid">
+<div class = "ui grid six wide column">
+        <h3>Empower Your Business</h3>
+        <img src = "https://images.unsplash.com/photo-1492366254240-43affaefc3e3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" height = "400"  width = "400">
+   
+</div>
+<div class = "ui ten wide column">
+<h1 class = "ui header center aligned"><%=pluralize(@applicants.size, "people")%> applied to <%= @business.name.capitalize%></h1>
+<hr class = "style-seven">
+        <% @applicants.each do |applicant|%>
+            <h3  class = "ui header center aligned"><%= link_to applicant.name, user_path(applicant)%>
+                <div class="ui buttons" >
+                    <button class= "ui button positive mini accept <%= applicant.name%>" >Accept</button>
+                <div class="or"></div>
+                    <%= link_to "Delete #{applicant.name}'s application", "businesses/#{@business.id}/apply", method: :delete ,class: "ui button negative mini"%>
+                </div>
+            </h3>
 
-<h3> If you choose to accept please chosse the department </h3>
-
-
-       <%= @business.name %> 
-        <h6>This business has <%= pluralize(@applicants.size, "application")%> </h6>
-        <hr>
-
-        <br>
-
-        <%@applicants.each do |applicant|%>
-            <%= applicant.name %> 
-            <button class= "accept">Accept</button>
-            <br>
-             <div class= "departments hidden menu">
-                <h3>Choose a department for <%= applicant.name %></h3>
-                <%@business.departments.each do |department|%>
-                    <%= link_to "assign #{applicant.name} to #{department.name}","/add/#{applicant.id}/departments/#{department.id}" , method: :post%>
-                <% end %>
+             <div class= "ui segment departments hidden menu <%= applicant.name%>">
+                <% if @business.departments%>
+                    <h2 class = "ui header center aligned">Choose a department for <%= applicant.name %></h2>
+                    <%@business.departments.each do |department|%>
+                        <h3 class = "ui header center aligned"><%= link_to "#{department.name}","/add/#{applicant.id}/departments/#{department.id}" , method: :post%></h3>
+                    <% end %>
+                    <%else%>
+                        <div class = "ui raised container">
+                           <p> Please create a department to hire someone. <%= link_to "Add department", new_admin_business_department_path(@business) %></p>
+                        </div>
+                <%end%>
              </div>
-            <br>
-            <%= link_to "Delete #{applicant.name}'s application", "businesses/#{@business.id}/apply", method: :delete %>
+           
+  
                
         <%end%>
+</div>
+</div>
 
+    
+<%= javascript_tag do %>
+     var project = <%=raw @applicants.to_json %>;
+    project.forEach(function(e){
+        $("button." + e.name).on("click",function(){
+             $("div.departments." + e.name).toggleClass("hidden menu");
+        });
 
-    <script>
-      var  accept =  $("button.accept")
-      var department = $("div.departments")
+    });
 
-       accept.on("click", function(){
-           department.removeClass("hidden menu")
-       }) 
-    </script>
+<% end %>
