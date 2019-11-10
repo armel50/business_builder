@@ -10,25 +10,6 @@ class MessagesController < ApplicationController
 #     PUT    /chat_rooms/:chat_room_id/messages/:id(.:format)                                         messages#update
 #     DELETE /chat_rooms/:chat_room_id/messages/:id(.:format)                                         messages#destroy
 
-    # def create 
-    #     # binding.pry
-    #     @message = Message.new(message_params)
-    #     @message.user = found_user
-
-    #     @message.chat_room = found_chat_room
-    #     @chat_room = found_chat_room 
-    #     # binding.pry
-    #     @department = @chat_room.department
-    #     if @message.save 
-    #         found_user.messages << @message 
-    #         # binding.pry
-    #     else 
-    #         flash[:notice] = "Message can't be blank"
-    #     end
-        
-    #     redirect_to department_chat_room_path(@department,@chat_room)
-    # end 
-
     def destroy 
         @chat_room = found_chat_room 
         @message = Message.find_by(id: params[:id])
