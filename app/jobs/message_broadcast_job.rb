@@ -4,7 +4,7 @@ class MessageBroadcastJob < ApplicationJob
 
   def perform(message)
      ActionCable.server.broadcast "chat_#{message.chat_room.id}_channel", render_message(message)
-       #  binding.pry
+        # binding.pry
   end
 
   private

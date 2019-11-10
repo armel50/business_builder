@@ -57,7 +57,7 @@ class ChatRoomsController < ApplicationController
         @messages = Message.where("chat_room_id = :chat_room",chat_room: @chat_room.id)
 
         @messages.each do |message|
-            @files << message if message.file.attached?
+            @files << message if message.attachment_data
         end
        
         

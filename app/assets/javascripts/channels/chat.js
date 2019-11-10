@@ -2,7 +2,7 @@ jQuery(document).on('turbolinks:load', function(){
   var messages;
 
   messages = jQuery('#messages');
-  // if (messages.length > 0) {
+
    messages_to_bottom =  function(){$("div.ui.segment.scroller").scrollTop(messages.prop("scrollHeight"))};
   
     messages_to_bottom();
@@ -15,16 +15,18 @@ jQuery(document).on('turbolinks:load', function(){
       disconnected: function() {},
       received: function(data) {  
           messages.append(data);
+           $('#message_content').val("");
           messages_to_bottom();
       },
-      send_message: function(message, chat_room_id,file) {
+      send_message: function(message, chat_room_id,file,file_name) {
         return this.perform('send_message', {
           message: message,
           chat_room_id: chat_room_id,
-          file: file
+          file: file,
+          file_name: file_name
         });
       }
     });
-  // }
+
 
 });

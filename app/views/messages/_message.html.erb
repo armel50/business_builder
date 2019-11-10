@@ -1,7 +1,7 @@
  <div class = "message ui raised segment">
     <%= message.content%><br>
-    <% if message.file.attached? %>
-        <span><%= link_to "Download file", message.file, download: "" %> <i class="download icon"></i></span>
+    <% if message.attachment_data %>
+        <span><%= link_to "Download #{message.file_name}", message.attachment_data, download: "" %> <i class="download icon"></i></span>
     <%end%>
    
     <%if current_user(session) == message.user%>

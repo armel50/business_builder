@@ -23,12 +23,15 @@
 
 
 <%#=======================================================================================================%>
-      <div class = "files ui container hidden menu">
+      <div class = "files ui container hidden menu" id = "files">
             <%@files.each do |file|%>
-            <span><%= link_to "Download File", file.file, download: "" %> <i class="download icon"></i></span>
-              
-              Uploaded by  <%= file.user.name.capitalize %> On: <%= file.created_at.strftime("%A, %d %B %Y") %>
-            <%end%>
+              <div class = "ui raise segment">
+              <span><%= link_to "Download #{file.file_name}", file.attachment_data, download: "" %> <i class="download icon"></i></span>
+                
+                 Uploaded by  <%= file.user.name.capitalize %> On: <%= file.created_at.strftime("%A, %d %B %Y") %> 
+                </div>
+              <%end%>
+           
       </div>
  <%#=======================================================================================================%>
 
@@ -50,8 +53,8 @@
             <div class="ui  fluid right labeled input">
                  <%= f.text_field :content, placeholder: "Enter a message"%>
                   <div class="ui button primary">
-                      <label for = "message_file" ><i class="cloud upload icon"></i> Upload<label>
-                      <%=f.file_field :file, class: "hidden menu"%>
+                      <label for = "message_attachment" ><i class="cloud upload icon"></i> Upload<label>
+                      <%=f.file_field :attachment, class: "hidden menu"%>
                   </div>
             </div>
                  <%= f.submit "Send message",class: "hidden menu" %>
@@ -79,6 +82,8 @@
 
    var files =  $("a.files")
    var div_file = $("div.files")
+   messages_to_bottom =  function(){$("div.ui.segment.scroller").scrollTop($("#messages").prop("scrollHeight"))};
+  files_to_bottom =  function(){$("div.ui.segment.scroller").scrollTop($("#files").prop("scrollHeight"))};
 
    messages.on("click",function(){
         $(this).addClass("active")
@@ -87,6 +92,9 @@
        div_part.addClass(" hidden menu")
        files.removeClass("active")
        div_file.addClass("hidden menu")
+
+  
+    messages_to_bottom();
    });
 
    participants.on("click",function(){
@@ -97,7 +105,6 @@
        
        messages.removeClass("active")
        div_mess.addClass(" hidden menu")
-      
    });
 
    files.on("click",function(){
@@ -109,20 +116,36 @@
 
        messages.removeClass("active")
        div_mess.addClass("hidden menu")
+      files_to_bottom();
    });
 
-/*
+
 $('#new_message').submit(function(e) {
   var $this, textarea;
   $this = $(this);
   textarea = $this.find('#message_content');
-  if ($.trim(textarea.val()).length > 1) {
-    console.log($("input#message_file").val());
-    App.global_chat.send_message(textarea.val(), $("#messages").data('chat-room-id'),$("input#message_file").val());
-    textarea.val('');
-  }
-  e.preventDefault();
-  return false;
-});*/
+  if ($.trim(textarea.val()).length > 1  ) {
+    if ($("input#message_attachment").get(0).files[0]){
+       
+        reader = new FileReader() ;
+        file_name = $("input#message_attachment").get(0).files[0].name;
+      
+        reader.addEventListener("loadend", function() {
+       
+        App.global_chat.send_message(textarea.val(), $("#messages").data('chat-room-id'),reader.result,file_name);
+      });
+        reader.readAsDataURL($("input#message_attachment").get(0).files[0]);
+        
+
+    }else {
+          App.global_chat.send_message(textarea.val(), $("#messages").data('chat-room-id'));
+    }
+    
+      e.preventDefault();
+        return false;
+ }
+            
+
+});
 </script>
 <%#=======================================================================================================%>
