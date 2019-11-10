@@ -1,7 +1,6 @@
 <h1 class = "ui header center aligned">Instant Chat: <%=@chat_room.title.capitalize%> <%= link_to "Edit Chat Room Name", edit_department_chat_room_path(@department,@chat_room), class: "ui button yellow right floated" %> </h1>
 <hr class = "style-seven">
 
-
  <div class="ui grid">
   <div class="four wide column" >
     <div class="ui vertical fluid tabular menu">
@@ -11,57 +10,49 @@
     </div>
   </div>
   <div class="twelve wide stretched column chatroom" style= "height: 400px" >
-    <div class="ui segment scroller">
-    
-<%#=======================================================================================================%>
-        <div class = "messages ui container "  id = "messages"  data-chat-room-id="<%= @chat_room.id %>">
-                <%= render @messages %>
-        </div>
-    
-<%#=======================================================================================================%>
+      <div class="ui segment scroller">
+      
+          <%# this is the div for the messages. %>
+              <div class = "messages ui container "  id = "messages"  data-chat-room-id="<%= @chat_room.id %>">
+                      <%= render @messages %>
+              </div>
 
 
-
-<%#=======================================================================================================%>
-      <div class = "files ui container hidden menu" id = "files">
-            <%@files.each do |file|%>
-              <div class = "ui raise segment">
-              <span><%= link_to "Download #{file.file_name}", file.attachment_data, download: "" %> <i class="download icon"></i></span>
-                
-                 Uploaded by  <%= file.user.name.capitalize %> On: <%= file.created_at.strftime("%A, %d %B %Y") %> 
-                </div>
-              <%end%>
-           
-      </div>
- <%#=======================================================================================================%>
-
-
-
-
-<%#=======================================================================================================%>
-      <div class = "view_participants hidden menu">
-          <h3><%=@chat_room.title.capitalize%> has <%=pluralize(@chat_room.department.users.size ,"participant")%><h3>
-          <%@chat_room.department.users.each do |user|%>
-              <%= link_to user.name, user_path(user) %><br>
-          <%end%>
-      </div>
-<%#=======================================================================================================%>
-    </div>
-
-      <div class = "ui container">
-            <%=form_for @message ,url: "/chat_rooms/#{@chat_room.id}/messages", multipart: true do |f|%>
-            <div class="ui  fluid right labeled input">
-                 <%= f.text_field :content, placeholder: "Enter a message"%>
-                  <div class="ui button primary">
-                      <label for = "message_attachment" ><i class="cloud upload icon"></i> Upload<label>
-                      <%=f.file_field :attachment, class: "hidden menu"%>
-                  </div>
+            <%# this is for the files. %>
+            <div class = "files ui container hidden menu" id = "files">
+                  <%@files.each do |file|%>
+                    <div class = "ui raise segment">
+                    <span><%= link_to "Download #{file.file_name}", file.attachment_data, download: "" %> <i class="download icon"></i></span>
+                      Uploaded by  <%= file.user.name.capitalize %> On: <%= file.created_at.strftime("%A, %d %B %Y") %> 
+                      </div>
+                    <%end%>  
             </div>
-                 <%= f.submit "Send message",class: "hidden menu" %>
-            <%end%>
+
+            <%# this is the div to view the members of the department %>
+            <div class = "view_participants hidden menu">
+                <h3><%=@chat_room.title.capitalize%> has <%=pluralize(@chat_room.department.users.size ,"participant")%><h3>
+                <%@chat_room.department.users.each do |user|%>
+                    <%= link_to user.name, user_path(user) %><br>
+                <%end%>
+            </div>
+
         </div>
+
+        <%# this is the form for the message %>
+          <div class = "ui container">
+                <%=form_for @message ,url: "/chat_rooms/#{@chat_room.id}/messages", multipart: true do |f|%>
+                <div class="ui  fluid right labeled input">
+                    <%= f.text_field :content, placeholder: "Enter a message"%>
+                      <div class="ui button primary">
+                          <label for = "message_attachment" ><i class="cloud upload icon"></i> Upload<label>
+                          <%=f.file_field :attachment, class: "hidden menu"%>
+                      </div>
+                </div>
+                    <%= f.submit "Send message",class: "hidden menu" %>
+                <%end%>
+            </div>
      
-  </div>
+      </div>
   
   </div>
   <br>
@@ -69,83 +60,7 @@
    <%= link_to "Delete #{@chat_room.title}", "/department/#{@department.id}/chat_rooms/#{@chat_room.id}", method: "delete", data: {confirm: "Are you sure you want to delete this chat room"}, class: "ui left floated button negative"%>
  <%end%>
 
-<%#=======================================================================================================%>
-<%#JAVASCRIPT %>
 
-<script> 
-
-    var messages= $("a.messages")
-    var div_mess = $("div.messages")
-
-   var participants =  $("a.view_participants")
-   var div_part = $("div.view_participants")
-
-   var files =  $("a.files")
-   var div_file = $("div.files")
-   messages_to_bottom =  function(){$("div.ui.segment.scroller").scrollTop($("#messages").prop("scrollHeight"))};
-  files_to_bottom =  function(){$("div.ui.segment.scroller").scrollTop($("#files").prop("scrollHeight"))};
-
-   messages.on("click",function(){
-        $(this).addClass("active")
-        div_mess.removeClass(" hidden menu")
-       participants.removeClass("active")
-       div_part.addClass(" hidden menu")
-       files.removeClass("active")
-       div_file.addClass("hidden menu")
-
-  
-    messages_to_bottom();
-   });
-
-   participants.on("click",function(){
-        $(this).addClass("active")
-        div_part.removeClass(" hidden menu")
-       files.removeClass("active")
-       div_file.addClass(" hidden menu")
-       
-       messages.removeClass("active")
-       div_mess.addClass(" hidden menu")
-   });
-
-   files.on("click",function(){
-       $(this).addClass("active")
-       div_file.removeClass("hidden menu")
-
-       participants.removeClass("active")
-       div_part.addClass(" hidden menu")
-
-       messages.removeClass("active")
-       div_mess.addClass("hidden menu")
-      files_to_bottom();
-   });
+<%# JAVASCRIPT is in app/javascripts/chat_rooms.js  %>
 
 
-$('#new_message').submit(function(e) {
-  var $this, textarea;
-  $this = $(this);
-  textarea = $this.find('#message_content');
-  if ($.trim(textarea.val()).length > 1  ) {
-    if ($("input#message_attachment").get(0).files[0]){
-       
-        reader = new FileReader() ;
-        file_name = $("input#message_attachment").get(0).files[0].name;
-      
-        reader.addEventListener("loadend", function() {
-       
-        App.global_chat.send_message(textarea.val(), $("#messages").data('chat-room-id'),reader.result,file_name);
-      });
-        reader.readAsDataURL($("input#message_attachment").get(0).files[0]);
-        
-
-    }else {
-          App.global_chat.send_message(textarea.val(), $("#messages").data('chat-room-id'));
-    }
-    
-      e.preventDefault();
-        return false;
- }
-            
-
-});
-</script>
-<%#=======================================================================================================%>
