@@ -23,6 +23,11 @@
         <hr  class = "style-seven">
            <h3 class = "ui header center aligned">Username: <%= @user.name %></h3>
           <h3 class = "ui header center aligned">Email: <%= @user.email %></h3>
+           <%if @user.admin %>
+            <h3 class = "ui header center aligned">Title: Admin <small> since <%=@user.created_at.strftime("%B, %d %Y")%> </small></h3>
+        <%else%>
+            <h3 class = "ui header center aligned">Title: Potentiel Employee <small>since <%=@user.created_at.strftime("%B, %d %Y")%></small>  </h3>
+          <%end%>
           <br><br>
           
              
@@ -36,17 +41,16 @@
 
           <h1 class = "ui header center aligned">Businesses</h1>
           <hr  class = "style-seven">
-          <%if @user.businesses%>
+          <%if @user.businesses && !@user.businesses.empty?%>
             <%@user.businesses.each do |business|%>  
               <h3 class = "ui header center aligned"><%= link_to "#{business.name.capitalize}", business_path(business) %> <small class = "ui mini">by <%=business.admin.name.capitalize%> </small></h3>
-             
-
             <%end%>
           <%else%>
             <div class = "ui raised segment">
               <p>You do not have a business yet. If you are an admin please create one otherwise apply to a business.</p>
             </div>
           <%end%>
+
         <%if !@user.admin %>
             <h1 class = "ui header center aligned">Businesses you applied to</h1>
             <hr  class = "style-seven">

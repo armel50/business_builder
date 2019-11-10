@@ -83,6 +83,22 @@ class BusinessesController < ApplicationController
     # binding.pry
   end
 
+  def terminate 
+    @user = User.find_by(id: params[:user_id])
+
+    @department = Department.find_by(id: params[:id])
+
+    @business = @department.business
+   
+    @user_business = UserBusiness.find_by(user_id: @user.id, business_id: @business.id)
+    @user_department = UserDepartment.find_by(user_id: @user.id, department_id: @department.id)
+    flash[:notice] = "#{@user.name.capitalize} is not part of #{@business.name.capitalize} anymore."
+    @user_business.delete if @user_business
+    @user_department.delete 
+    
+    redirect_to @business
+  end
+
 
   
   # post "/businesses/:id/apply", to: "businesses#create_application"

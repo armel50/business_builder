@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   get "/businesses/:id/view_applicants", to: "businesses#view_application"
 
 
+  delete "/terminate/:id/:user_id", to: "businesses#terminate"
 
   post "/submit_check_goals/:project_id", to: "goals#check_goal"
   patch "/department/4/projects", to: "projects#update"

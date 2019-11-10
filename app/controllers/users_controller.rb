@@ -65,7 +65,7 @@ class UsersController < ApplicationController
     def show 
         @user = User.find(params[:id])
         if !@user.admin 
-            @applied_businesses = Application.where("user_id = :id ",{ id: @user.id})
+            @applied_businesses = Application.where("user_id = :id ",{ id: @user.id}).map{|application| application.business}
         end
     end 
 

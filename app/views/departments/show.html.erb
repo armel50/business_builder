@@ -28,6 +28,13 @@
    <%end%>
 </div>
 
+ <h1 class = "ui header center aligned"> <%= pluralize(@department.users.size,"Employee") %>  </h1>
+  <hr class = "style-seven">
+  <%@department.users.each do |user|%>
+   <h3 class = "ui header center aligned"> <%= link_to user.name, user_path(user) %> <%= link_to "Terminate","/terminate/#{@department.id}/#{user.id}", class: "ui negative basic button mini", :method => :delete, data: {confirm: "Are you sure you want to terminate #{user.name.capitalize}"} %></h3>
+  <%end%>
+
+
 
  
 

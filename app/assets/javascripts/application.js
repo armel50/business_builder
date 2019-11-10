@@ -21,7 +21,7 @@ $(document).ready(function() {
     $('.masthead').visibility({
         once: false,
         onBottomPassed: function() {
-          $('.fixed.menu').transition('fade in',1000);
+          $('.fixed.menu').transition('fade in');
         },
         onBottomPassedReverse: function() {
           $('.fixed.menu').transition('fade out');
@@ -32,9 +32,9 @@ $(document).ready(function() {
     $('.ui.sidebar').sidebar('attach events', '.toc.item');
 
     $(".main.item").hover(function(){
-      $(this).toggleClass("active", 2000);
+      $(this).toggleClass("active");
     },function(){
-      $(this).toggleClass("active", 2000);
+      $(this).toggleClass("active");
     });
 
     $('.message .close').on('click', function() {

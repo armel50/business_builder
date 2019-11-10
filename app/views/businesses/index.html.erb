@@ -17,11 +17,14 @@
           <div class="center">
             <div class="ui inverted button">
                <% if !current_user(session).admin %>
-                     <% if !already_applied(current_user(session), business) %>
-                        <%= link_to 'Apply to this businness', "/businesses/#{business.id}/apply" , method: :post %>
-                     <% else %>
-                        <%= link_to "Delete my application", "/businesses/#{business.id}/apply", method: :delete %>
-                     <% end %>
+                      <% if business.users.include?(current_user(session))%>
+                        You are Already part of <%= business.name.capitalize%>
+                      <% elsif !already_applied(current_user(session), business) %>
+                          <%= link_to 'Apply to this businness', "/businesses/#{business.id}/apply" , method: :post %>
+                      <% else %>
+                          <%= link_to "Delete my application", "/businesses/#{business.id}/apply", method: :delete %>
+                      <% end %>
+                    
             
                <%else%>
                   You Are An Admin
