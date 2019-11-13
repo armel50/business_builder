@@ -15,7 +15,7 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded",function() {
   
     // fix menu when passed
     $('.masthead').visibility({

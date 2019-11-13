@@ -56,7 +56,7 @@
             <hr  class = "style-seven">
             <%if !@applied_businesses.empty? %>
             <%@applied_businesses.each do |business|%>
-              <h3 class = "ui header center aligned"><%=business.name%></h3>
+              <h3 class = "ui header center aligned"><%=business.name if business%></h3>
             <%end%>
             <%else%>
             <div class = "ui raised segment">

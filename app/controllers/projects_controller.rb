@@ -24,11 +24,11 @@ class ProjectsController < ApplicationController
 
     def show 
         @project = found_project
-        respond_to do |format| 
+        # respond_to do |format| 
            
-            format.js
-            format.html
-        end
+        #     format.js
+        #     format.html
+        # end
     end
 
     def edit

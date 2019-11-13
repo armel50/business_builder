@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function() {
     var messages= $("a.messages")
     var div_mess = $("div.messages")
 
