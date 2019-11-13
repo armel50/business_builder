@@ -1,7 +1,7 @@
 # README: BUSINESS_BUILDER
 
 * Short Description 
- Business_Builder is an app design to mock the structure of a business.
+ - Business_Builder is an app design to mock the structure of a business.
 
 * Download the repo
  `git clone git@github.com:armel50/business_builder.git`
