@@ -8,17 +8,17 @@
 
 * Features
     - Login 
-        User can login via github: `gem "omniauth-github"`
-        User can login directly through the app 
+        - User can login via github: `gem "omniauth-github"`
+        - User can login directly through the app 
     - Interaction 
-        User can `CRUD` business only if the user is signed in as an `ADMIN`
-        User can apply to a business only if the user is `NOT ADMIN`
-        User can `CRUD`projects 
-        User can create and delete goals for the projects 
-        User can update the progression of the projects by checking a goal
-        User can create and delete a chat_room only if user is `ADMIN`
-        User can experience the real time chat app: `action cable`
-        User can send files: `gem shrine`
+        - User can `CRUD` business only if the user is signed in as an `ADMIN`
+        - User can apply to a business only if the user is `NOT ADMIN`
+        - User can `CRUD`projects 
+        - User can create and delete goals for the projects 
+        - User can update the progression of the projects by checking a goal
+        - User can create and delete a chat_room only if user is `ADMIN`
+        - User can experience the real time chat app: `action cable`
+        - User can send files: `gem shrine`
 
 * Rails version
     - gem 'rails', '~> 5.2.3'
