@@ -13,7 +13,7 @@
 //= require cable
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
+
 //= require_tree .
 document.addEventListener("DOMContentLoaded",function() {
   

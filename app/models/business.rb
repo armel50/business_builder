@@ -11,7 +11,7 @@ class Business < ApplicationRecord
     has_many :projects, through: :departments
     has_many :goals, through: :projects 
     has_many :chatrooms, through: :departments 
-    has_many :notifications, through: :departments
+    # has_many :notifications, through: :departments
     has_many :categories
 
 

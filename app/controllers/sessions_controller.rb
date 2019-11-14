@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
         user = User.find_by(email: auth["info"]["email"]) 
         if user
             session[:user_id] = user.id
-            cookies.encrypted[:user_id] = @user.id
+            cookies.encrypted[:user_id] = user.id
             flash[:notice] = "Welcome back #{user.name}!"
             redirect_to user 
         else

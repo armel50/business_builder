@@ -1,4 +1,4 @@
-jQuery(document).on('turbolinks:load', function(){
+jQuery(document).on("DOMContentLoaded", function(){
   var messages;
 
   messages = jQuery('#messages');
