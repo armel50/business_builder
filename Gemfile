@@ -40,7 +40,7 @@ gem "pry"
 # gem 'redis', '~> 3.2'
 gem "jquery-rails"
 gem "devise"
-gem 'shrine', '~> 2.6'
+gem 'shrine', '~> 3.3', '>= 3.3.0'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
