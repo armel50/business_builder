@@ -27,12 +27,12 @@ gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 #login through google, github, and linkedin
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
+gem 'omniauth', '>= 2.0.0'
+gem 'omniauth-google-oauth2', '>= 0.8.0'
 
 gem "dotenv-rails"
 
-gem 'omniauth-github' 
+gem 'omniauth-github' , '>= 2.0.0'
 gem 'tux'
 gem 'omniauth-linkedin'
 
