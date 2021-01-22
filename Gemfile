@@ -34,7 +34,7 @@ gem "dotenv-rails"
 
 gem 'omniauth-github' 
 gem 'tux'
-gem 'omniauth-linkedin'
+gem 'omniauth-linkedin', '>= 0.2.0'
 
 gem "pry"
 # gem 'redis', '~> 3.2'
