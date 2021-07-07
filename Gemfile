@@ -40,7 +40,7 @@ gem "pry"
 # gem 'redis', '~> 3.2'
 gem "jquery-rails"
 gem "devise"
-gem 'shrine', '~> 2.6'
+gem 'shrine', '~> 2.19', '>= 2.19.3'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -66,7 +66,7 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '>= 3.29.0'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
