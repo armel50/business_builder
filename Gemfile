@@ -28,11 +28,11 @@ gem 'redis', '~> 4.0'
 gem 'bcrypt', '~> 3.1.7'
 #login through google, github, and linkedin
 gem 'omniauth'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '>= 0.8.1'
 
 gem "dotenv-rails"
 
-gem 'omniauth-github' 
+gem 'omniauth-github' , '>= 1.4.0'
 gem 'tux'
 gem 'omniauth-linkedin'
 
